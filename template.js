@@ -19,6 +19,7 @@ module.exports = {
 			x = x * 128 + y;
 
 			receive("/text_1", tracks[x].Track);
+
 			tracks = [tracks[x]];
 
 			var artButtonsNamesVars = [];
@@ -34,6 +35,7 @@ module.exports = {
 			var fadCodesVars = [];
 			var fadDefaultsVars = [];
 			var fadNamesVars = [];
+			var fadIDsVars = [];
 
 			var artButtonsNames = [];
 			var artButtonsModes = [];
@@ -104,15 +106,17 @@ module.exports = {
 					}
 				}
 			}
-			for (let i = 0; i < 9; i++) {
+			for (let i = 0; i < 8; i++) {
 
 				fadCodesVars[i] = "/CC" + (i + 1) + "_increment_value";
-				fadDefaultsVars[i] = "/CC_Preset_CC" + (i + 1) + "_Default";
+				// fadDefaultsVars[i] = "/CC_Preset_CC" + (i + 1) + "_Default"; //might not need this at all
 				fadNamesVars[i] = "/CC" + (i + 1) + "_display_Setting";
+				fadIDsVars[i] = "/CC" + (i + 1) + "_fader"
 
 				receive(fadCodesVars[i], parseInt(fadCodes[i]));
-				receive(fadDefaultsVars[i], parseInt(fadDefaults[i]));
+				// receive(fadDefaultsVars[i], parseInt(fadDefaults[i])); //might not need this at all
 				receive(fadNamesVars[i], fadNames[i]);
+				receive(fadIDsVars[i], parseInt(fadDefaults[i]));
 
 				if (fadCodes[i] !== null) {
 
