@@ -9399,7 +9399,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art3off}",
+            "bypass": "@{art3input}",
             "onCreate": "",
             "onValue": "var x = get('art3mode')\n\nif (x === 0.15){\n  set('art3mode', 0.75)\n  set('art4mode', 0.15)\n  set('art5mode', 0.15)\n  set('art6mode', 0.15)\n  set('art7mode', 0.15)\n  set('art8mode', 0.15)\n  set('art9mode', 0.15)\n  set('art10mode', 0.15)\n  set('art11mode', 0.15)\n  set('art12mode', 0.15)\n  set('art13mode', 0.15)\n  set('art14mode', 0.15)\n  set('art15mode', 0.15)\n  set('art16mode', 0.15)\n  set('art17mode', 0.15)\n  set('art18mode', 0.15)\n} \nelse {\n  set('art3mode', 0.15)\n}\n\n"
           },
@@ -9633,7 +9633,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art4off}",
+            "bypass": "@{art4input}",
             "onCreate": "",
             "onValue": "var x = get('art4mode')\n\nif (x === 0.15){\n  set('art3mode', 0.15)\n  set('art4mode', 0.75)\n  set('art5mode', 0.15)\n  set('art6mode', 0.15)\n  set('art7mode', 0.15)\n  set('art8mode', 0.15)\n  set('art9mode', 0.15)\n  set('art10mode', 0.15)\n  set('art11mode', 0.15)\n  set('art12mode', 0.15)\n  set('art13mode', 0.15)\n  set('art14mode', 0.15)\n  set('art15mode', 0.15)\n  set('art16mode', 0.15)\n  set('art17mode', 0.15)\n  set('art18mode', 0.15)\n}\nelse {\n  set('art4mode', 0.15)\n}"
           },
@@ -9867,7 +9867,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art5off}",
+            "bypass": "@{art5input}",
             "onCreate": "",
             "onValue": "var x = get('art5mode')\n\nif (x === 0.15){\n  set('art3mode', 0.15)\n  set('art4mode', 0.15)\n  set('art5mode', 0.75)\n  set('art6mode', 0.15)\n  set('art7mode', 0.15)\n  set('art8mode', 0.15)\n  set('art9mode', 0.15)\n  set('art10mode', 0.15)\n  set('art11mode', 0.15)\n  set('art12mode', 0.15)\n  set('art13mode', 0.15)\n  set('art14mode', 0.15)\n  set('art15mode', 0.15)\n  set('art16mode', 0.15)\n  set('art17mode', 0.15)\n  set('art18mode', 0.15)\n}\nelse {\n  set('art5mode', 0.15)\n}"
           },
@@ -10101,7 +10101,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art6off}",
+            "bypass": "@{art6input}",
             "onCreate": "",
             "onValue": "var x = get('art6mode')\n\nif (x === 0.15){\n  set('art3mode', 0.15)\n  set('art4mode', 0.15)\n  set('art5mode', 0.15)\n  set('art6mode', 0.75)\n  set('art7mode', 0.15)\n  set('art8mode', 0.15)\n  set('art9mode', 0.15)\n  set('art10mode', 0.15)\n  set('art11mode', 0.15)\n  set('art12mode', 0.15)\n  set('art13mode', 0.15)\n  set('art14mode', 0.15)\n  set('art15mode', 0.15)\n  set('art16mode', 0.15)\n  set('art17mode', 0.15)\n  set('art18mode', 0.15)\n}\nelse {\n  set('art6mode', 0.15)\n}"
           },
@@ -10335,7 +10335,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art7off}",
+            "bypass": "@{art7input}",
             "onCreate": "",
             "onValue": "var x = get('art7mode')\n\nif (x === 0.15){\n  set('art3mode', 0.15)\n  set('art4mode', 0.15)\n  set('art5mode', 0.15)\n  set('art6mode', 0.15)\n  set('art7mode', 0.75)\n  set('art8mode', 0.15)\n  set('art9mode', 0.15)\n  set('art10mode', 0.15)\n  set('art11mode', 0.15)\n  set('art12mode', 0.15)\n  set('art13mode', 0.15)\n  set('art14mode', 0.15)\n  set('art15mode', 0.15)\n  set('art16mode', 0.15)\n  set('art17mode', 0.15)\n  set('art18mode', 0.15)\n}\nelse {\n  set('art7mode', 0.15)\n}"
           },
@@ -10569,7 +10569,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art8off}",
+            "bypass": "@{art8input}",
             "onCreate": "",
             "onValue": "var x = get('art8mode')\n\nif (x === 0.15){\n  set('art3mode', 0.15)\n  set('art4mode', 0.15)\n  set('art5mode', 0.15)\n  set('art6mode', 0.15)\n  set('art7mode', 0.15)\n  set('art8mode', 0.75)\n  set('art9mode', 0.15)\n  set('art10mode', 0.15)\n  set('art11mode', 0.15)\n  set('art12mode', 0.15)\n  set('art13mode', 0.15)\n  set('art14mode', 0.15)\n  set('art15mode', 0.15)\n  set('art16mode', 0.15)\n  set('art17mode', 0.15)\n  set('art18mode', 0.15)\n}\nelse {\n  set('art8mode', 0.15)\n}"
           },
@@ -11038,7 +11038,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art9off}",
+            "bypass": "@{art9input}",
             "onCreate": "",
             "onValue": "var x = get('art9mode')\n\nif (x === 0.15){\n  set('art3mode', 0.15)\n  set('art4mode', 0.15)\n  set('art5mode', 0.15)\n  set('art6mode', 0.15)\n  set('art7mode', 0.15)\n  set('art8mode', 0.15)\n  set('art9mode', 0.75)\n  set('art10mode', 0.15)\n  set('art11mode', 0.15)\n  set('art12mode', 0.15)\n  set('art13mode', 0.15)\n  set('art14mode', 0.15)\n  set('art15mode', 0.15)\n  set('art16mode', 0.15)\n  set('art17mode', 0.15)\n  set('art18mode', 0.15)\n}\nelse {\n  set('art9mode', 0.15)\n}"
           },
@@ -11272,7 +11272,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art10off}",
+            "bypass": "@{art10input}",
             "onCreate": "",
             "onValue": "var x = get('art10mode')\n\nif (x === 0.15){\n  set('art3mode', 0.15)\n  set('art4mode', 0.15)\n  set('art5mode', 0.15)\n  set('art6mode', 0.15)\n  set('art7mode', 0.15)\n  set('art8mode', 0.15)\n  set('art9mode', 0.15)\n  set('art10mode', 0.75)\n  set('art11mode', 0.15)\n  set('art12mode', 0.15)\n  set('art13mode', 0.15)\n  set('art14mode', 0.15)\n  set('art15mode', 0.15)\n  set('art16mode', 0.15)\n  set('art17mode', 0.15)\n  set('art18mode', 0.15)\n}\nelse {\n  set('art10mode', 0.15)\n}"
           },
@@ -11506,7 +11506,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art11off}",
+            "bypass": "@{art11input}",
             "onCreate": "",
             "onValue": "var x = get('art11mode')\n\nif (x === 0.15){\n  set('art3mode', 0.15)\n  set('art4mode', 0.15)\n  set('art5mode', 0.15)\n  set('art6mode', 0.15)\n  set('art7mode', 0.15)\n  set('art8mode', 0.15)\n  set('art9mode', 0.15)\n  set('art10mode', 0.15)\n  set('art11mode', 0.75)\n  set('art12mode', 0.15)\n  set('art13mode', 0.15)\n  set('art14mode', 0.15)\n  set('art15mode', 0.15)\n  set('art16mode', 0.15)\n  set('art17mode', 0.15)\n  set('art18mode', 0.15)\n}\nelse {\n  set('art11mode', 0.15)\n}"
           },
@@ -11740,7 +11740,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art12off}",
+            "bypass": "@{art12input}",
             "onCreate": "",
             "onValue": "var x = get('art12mode')\n\nif (x === 0.15){\n  set('art3mode', 0.15)\n  set('art4mode', 0.15)\n  set('art5mode', 0.15)\n  set('art6mode', 0.15)\n  set('art7mode', 0.15)\n  set('art8mode', 0.15)\n  set('art9mode', 0.15)\n  set('art10mode', 0.15)\n  set('art11mode', 0.15)\n  set('art12mode', 0.75)\n  set('art13mode', 0.15)\n  set('art14mode', 0.15)\n  set('art15mode', 0.15)\n  set('art16mode', 0.15)\n  set('art17mode', 0.15)\n  set('art18mode', 0.15)\n}\nelse {\n  set('art12mode', 0.15)\n}"
           },
@@ -11974,7 +11974,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art13off}",
+            "bypass": "@{art13input}",
             "onCreate": "",
             "onValue": "var x = get('art13mode')\n\nif (x === 0.15){\n  set('art3mode', 0.15)\n  set('art4mode', 0.15)\n  set('art5mode', 0.15)\n  set('art6mode', 0.15)\n  set('art7mode', 0.15)\n  set('art8mode', 0.15)\n  set('art9mode', 0.15)\n  set('art10mode', 0.15)\n  set('art11mode', 0.15)\n  set('art12mode', 0.15)\n  set('art13mode', 0.75)\n  set('art14mode', 0.15)\n  set('art15mode', 0.15)\n  set('art16mode', 0.15)\n  set('art17mode', 0.15)\n  set('art18mode', 0.15)\n}\nelse {\n  set('art13mode', 0.15)\n}"
           },
@@ -12208,7 +12208,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art14off}",
+            "bypass": "@{art14input}",
             "onCreate": "",
             "onValue": "var x = get('art14mode')\n\nif (x === 0.15){\n  set('art3mode', 0.15)\n  set('art4mode', 0.15)\n  set('art5mode', 0.15)\n  set('art6mode', 0.15)\n  set('art7mode', 0.15)\n  set('art8mode', 0.15)\n  set('art9mode', 0.15)\n  set('art10mode', 0.15)\n  set('art11mode', 0.15)\n  set('art12mode', 0.15)\n  set('art13mode', 0.15)\n  set('art14mode', 0.75)\n  set('art15mode', 0.15)\n  set('art16mode', 0.15)\n  set('art17mode', 0.15)\n  set('art18mode', 0.15)\n}\nelse {\n  set('art14mode', 0.15)\n}"
           },
@@ -12442,7 +12442,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art15off}",
+            "bypass": "@{art15input}",
             "onCreate": "",
             "onValue": "var x = get('art15mode')\n\nif (x === 0.15){\n  set('art3mode', 0.15)\n  set('art4mode', 0.15)\n  set('art5mode', 0.15)\n  set('art6mode', 0.15)\n  set('art7mode', 0.15)\n  set('art8mode', 0.15)\n  set('art9mode', 0.15)\n  set('art10mode', 0.15)\n  set('art11mode', 0.15)\n  set('art12mode', 0.15)\n  set('art13mode', 0.15)\n  set('art14mode', 0.15)\n  set('art15mode', 0.75)\n  set('art16mode', 0.15)\n  set('art17mode', 0.15)\n  set('art18mode', 0.15)\n}\nelse {\n  set('art15mode', 0.15)\n}"
           },
@@ -12676,7 +12676,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art16off}",
+            "bypass": "@{art16input}",
             "onCreate": "",
             "onValue": "var x = get('art16mode')\n\nif (x === 0.15){\n  set('art3mode', 0.15)\n  set('art4mode', 0.15)\n  set('art5mode', 0.15)\n  set('art6mode', 0.15)\n  set('art7mode', 0.15)\n  set('art8mode', 0.15)\n  set('art9mode', 0.15)\n  set('art10mode', 0.15)\n  set('art11mode', 0.15)\n  set('art12mode', 0.15)\n  set('art13mode', 0.15)\n  set('art14mode', 0.15)\n  set('art15mode', 0.15)\n  set('art16mode', 0.75)\n  set('art17mode', 0.15)\n  set('art18mode', 0.15)\n}\nelse {\n  set('art16mode', 0.15)\n}"
           },
@@ -12910,7 +12910,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art17off}",
+            "bypass": "@{art17input}",
             "onCreate": "",
             "onValue": "var x = get('art17mode')\n\nif (x === 0.15){\n  set('art3mode', 0.15)\n  set('art4mode', 0.15)\n  set('art5mode', 0.15)\n  set('art6mode', 0.15)\n  set('art7mode', 0.15)\n  set('art8mode', 0.15)\n  set('art9mode', 0.15)\n  set('art10mode', 0.15)\n  set('art11mode', 0.15)\n  set('art12mode', 0.15)\n  set('art13mode', 0.15)\n  set('art14mode', 0.15)\n  set('art15mode', 0.15)\n  set('art16mode', 0.15)\n  set('art17mode', 0.75)\n  set('art18mode', 0.15)\n}\nelse {\n  set('art17mode', 0.15)\n}"
           },
@@ -13144,7 +13144,7 @@
             "decimals": 2,
             "target": "midi:OSC4",
             "ignoreDefaults": true,
-            "bypass": "@{art18off}",
+            "bypass": "@{art18input}",
             "onCreate": "",
             "onValue": "var x = get('art18mode')\n\nif (x === 0.15){\n  set('art3mode', 0.15)\n  set('art4mode', 0.15)\n  set('art5mode', 0.15)\n  set('art6mode', 0.15)\n  set('art7mode', 0.15)\n  set('art8mode', 0.15)\n  set('art9mode', 0.15)\n  set('art10mode', 0.15)\n  set('art11mode', 0.15)\n  set('art12mode', 0.15)\n  set('art13mode', 0.15)\n  set('art14mode', 0.15)\n  set('art15mode', 0.15)\n  set('art16mode', 0.15)\n  set('art17mode', 0.15)\n  set('art18mode', 0.75)\n}\nelse {\n  set('art18mode', 0.15)\n}"
           },
