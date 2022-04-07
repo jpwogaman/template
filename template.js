@@ -36,6 +36,9 @@ module.exports = {
 			var artButtonsOnsVars = [];
 			var artButtonsOffsVars = [];
 			var artButtonsInputsVars = [];
+			var fadCodesVars = [];
+			var fadDefaultsVars = [];
+			var fadNamesVars = [];
 
 			var artButtonsNames = [];
 			var artButtonsModes = [];
@@ -45,6 +48,9 @@ module.exports = {
 			var artButtonsOns = [];
 			var artButtonsOffs = [];
 			var artButtonsInputs = [];
+			var fadCodes = [];
+			var fadDefaults = [];
+			var fadNames = [];
 
 			for (var key in tracks) {
 
@@ -75,6 +81,46 @@ module.exports = {
 					if (prop.includes('_Off')) {
 						artButtonsOffs.push(obj[prop])
 					}
+					if (prop.includes('FadA')) {
+						fadCodes.push(obj[prop])
+					}
+					if (prop.includes('FadB')) {
+						fadDefaults.push(obj[prop])
+					}
+					if (prop.includes('FadC')) {
+						fadNames.push(obj[prop])
+					}
+				}
+			}
+
+			for (let i = 0; i < 9; i++) {
+
+				fadCodesVars[i] = '/CC' + (i + 1) + '_increment_value';
+				fadDefaultsVars[i] = '/CC_Preset_CC' + (i + 1) + '_Default';
+				fadNamesVars[i] = '/CC' + (i + 1) + '_display_Setting';
+
+				receive(fadCodesVars[i], parseInt(fadCodes[i]))
+				receive(fadDefaultsVars[i], parseInt(fadDefaults[i]))
+				receive(fadNamesVars[i], fadNames[i])
+
+				if (fadCodes[i] !== null) {
+					sendOsc({
+						address: '/control',
+						args: [{
+							type: 'i',
+							value: 1
+						}, {
+							type: 'i',
+							value: fadCodes[i]
+						}, {
+							type: 'i',
+							value: fadDefaults[i]
+						}],
+						host: 'midi',
+						port: 'OSC4'
+					})
+				} else {
+					return
 				}
 			}
 
@@ -133,7 +179,7 @@ module.exports = {
 						receive(artButtonsColorsVars[i], "#6dfdbb")
 						receive(artButtonsDefaultsVars[i], parseInt(artButtonsDefaults[i]))
 
-						if (parseInt(artButtonsDefaults[i]) != 0) {
+						if (parseInt(artButtonsDefaults[i]) !== 0) {
 
 							sendOsc({
 								address: artButtonsTypes[i],
@@ -159,38 +205,6 @@ module.exports = {
 					}
 				}
 			}
-
-
-			// for (let i = 0; i < 9; i++) {
-			//   receive('/CC' + String.fromCharCode(65 + i) + '_increment_value', String.fromCharCode(97 + i) + 1)
-			//   var String.fromCharCode(97 + i) + 1 = parseInt(tracks[x].String.fromCharCode(65 + i) + 1)
-			//   var String.fromCharCode(97 + i) + 2 = parseInt(tracks[x].String.fromCharCode(65 + i) + 2)
-			//   var String.fromCharCode(97 + i) + 3 = tracks[x].String.fromCharCode(65 + i) + 3
-			// }
-
-
-			//POPULATE FADERS/////////////////////////////////////////////////////////
-
-			// receive('/CCH_increment_value', h1)
-			// receive('/CC_Preset_CCH_Default', h2)
-			// receive('/CCH_display_Setting', h3)
-			// if (tracks[x].H1 !== null) {
-			//   sendOsc({
-			//     address: '/control',
-			//     args: [{
-			//       type: 'i',
-			//       value: 1
-			//     }, {
-			//       type: 'i',
-			//       value: h1
-			//     }, {
-			//       type: 'i',
-			//       value: h2
-			//     }],
-			//     host: 'midi',
-			//     port: 'OSC4'
-			//   })
-			// } else {}
 
 		}
 
