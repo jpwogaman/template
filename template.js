@@ -18,12 +18,13 @@ module.exports = {
 			var y = args[2].value;
 			x = x * 128 + y;
 
-			receive("/text_1", tracks[x].Track);
+			receive("/selectedTrackName", tracks[x].Track);
 
 			tracks = [tracks[x]];
 
 			var artButtonsNamesVars = [];
-			var artButtonsModesVars = [];
+			var artButtonsModesAVars = [];
+			var artButtonsModesBVars = [];
 			var artButtonsTypesVars = [];
 			var artButtonsCodesVars = [];
 			var artButtonsColorsVars = [];
@@ -38,7 +39,6 @@ module.exports = {
 			var fadIDsVars = [];
 
 			var artButtonsNames = [];
-			var artButtonsModes = [];
 			var artButtonsTypes = [];
 			var artButtonsCodes = [];
 			var artButtonsDefaults = [];
@@ -62,10 +62,6 @@ module.exports = {
 					if (prop.includes("_Name")) {
 
 						artButtonsNames.push(obj[prop]);
-
-					} else if (prop.includes("_Mode")) {
-
-						artButtonsModes.push(obj[prop]);
 
 					} else if (prop.includes("_Type")) {
 
@@ -131,7 +127,8 @@ module.exports = {
 			for (let i = 0; i < 18; i++) {
 
 				artButtonsNamesVars[i] = "/art" + (i + 1) + "name";
-				artButtonsModesVars[i] = "/art" + (i + 1) + "mode";
+				artButtonsModesAVars[i] = "/art" + (i + 1) + "modeA";
+				artButtonsModesBVars[i] = "/art" + (i + 1) + "modeB";
 				artButtonsTypesVars[i] = "/art" + (i + 1) + "type";
 				artButtonsCodesVars[i] = "/art" + (i + 1) + "code";
 				artButtonsColorsVars[i] = "/art" + (i + 1) + "color";
@@ -140,31 +137,29 @@ module.exports = {
 				artButtonsOffsVars[i] = "/art" + (i + 1) + "off";
 				artButtonsInputsVars[i] = "/art" + (i + 1) + "input";
 
-				receive(artButtonsNamesVars[i], artButtonsNames[i]);
-				receive(artButtonsModesVars[i], artButtonsModes[i]);
+				receive(artButtonsNamesVars[i], String(artButtonsNames[i]));
 				receive(artButtonsTypesVars[i], String(artButtonsTypes[i]));
 				receive(artButtonsCodesVars[i], parseInt(artButtonsCodes[i]));
 				receive(artButtonsDefaultsVars[i], parseInt(artButtonsDefaults[i]));
 				receive(artButtonsOnsVars[i], parseInt(artButtonsOns[i]));
 				receive(artButtonsOffsVars[i], parseInt(artButtonsOffs[i]));
+				receive(artButtonsModesAVars[i], 0.15); // reset
+				receive(artButtonsModesBVars[i], 0.15); // reset
 
 				//NESTED IF'S PROBABLY NOT GREAT IDEA
 
-				if (artButtonsNames[i] === "" || artButtonsNames[i] === null) {
+				if (artButtonsNames[i] === "") {
 
 					receive(artButtonsInputsVars[i], "true");
 					receive(artButtonsColorsVars[i], "#A9A9A9");
-					receive(artButtonsModesVars[i], 0.15); //alphaFillOff for buttons 1&2 alphaFillOn for rest
 
 				} else {
 
-					receive(artButtonsModesVars[i], 0.75);
+					receive(artButtonsInputsVars[i], "false");
 
 					if (artButtonsNamesVars[i] === "/art1name" || artButtonsNamesVars[i] === "/art2name") {
 
-						receive(artButtonsInputsVars[i], "false");
 						receive(artButtonsColorsVars[i], "#a86739");
-
 						send("midi", "OSC3", String(artButtonsTypes[i]), 1, parseInt(artButtonsCodes[i]), parseInt(artButtonsDefaults[i]));
 
 					} else {
@@ -174,11 +169,10 @@ module.exports = {
 
 						if (parseInt(artButtonsDefaults[i]) !== 0) {
 
+							receive(artButtonsModesAVars[i], 0.75);
 							send("midi", "OSC4", String(artButtonsTypes[i]), 1, parseInt(artButtonsCodes[i]), parseInt(artButtonsDefaults[i]));
 
 						} else {
-
-							receive(artButtonsModesVars[i], 0.15);
 
 						}
 					}
