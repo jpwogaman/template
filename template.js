@@ -13,7 +13,9 @@ module.exports = {
 
 			send('midi', 'OSC4', '/control', 1, 127, 127)
 
-		} else {}
+		} else {
+
+		}
 
 		var tracks = loadJSON('../template/tracks.json')
 
@@ -104,25 +106,14 @@ module.exports = {
 				receive(fadNamesVars[i], fadNames[i])
 
 				if (fadCodes[i] !== null) {
-					sendOsc({
-						address: '/control',
-						args: [{
-							type: 'i',
-							value: 1
-						}, {
-							type: 'i',
-							value: fadCodes[i]
-						}, {
-							type: 'i',
-							value: fadDefaults[i]
-						}],
-						host: 'midi',
-						port: 'OSC4'
-					})
+
+					send('midi', 'OSC4', '/control', 1, parseInt(fadCodes[i]), parseInt(fadDefaults[i]))
+
 				} else {
-					return
+					continue
 				}
 			}
+
 
 			for (let i = 0; i < 18; i++) {
 
@@ -138,11 +129,13 @@ module.exports = {
 
 				receive(artButtonsNamesVars[i], artButtonsNames[i])
 				receive(artButtonsModesVars[i], artButtonsModes[i])
-				receive(artButtonsTypesVars[i], artButtonsTypes[i])
+				receive(artButtonsTypesVars[i], String(artButtonsTypes[i]))
 				receive(artButtonsCodesVars[i], parseInt(artButtonsCodes[i]))
 				receive(artButtonsDefaultsVars[i], parseInt(artButtonsDefaults[i]))
 				receive(artButtonsOnsVars[i], parseInt(artButtonsOns[i]))
 				receive(artButtonsOffsVars[i], parseInt(artButtonsOffs[i]))
+
+				//NESTED IF'S PROBABLY NOT GREAT IDEA
 
 				if (artButtonsNames[i] === "" || artButtonsNames[i] === null) {
 
@@ -155,24 +148,9 @@ module.exports = {
 					receive(artButtonsModesVars[i], 0.75)
 					if (artButtonsNamesVars[i] === '/art1name' || artButtonsNamesVars[i] === '/art2name') {
 
-
 						receive(artButtonsInputsVars[i], 'false')
 						receive(artButtonsColorsVars[i], "#a86739")
-						sendOsc({
-							address: artButtonsTypes[i],
-							args: [{
-								type: 'i',
-								value: 1
-							}, {
-								type: 'i',
-								value: parseInt(artButtonsCodes[i])
-							}, {
-								type: 'i',
-								value: parseInt(artButtonsDefaults[i])
-							}],
-							host: 'midi',
-							port: 'OSC3' //OSC3 means OSC will also receive this command
-						})
+						send('midi', 'OSC3', String(artButtonsTypes[i]), 1, parseInt(artButtonsCodes[i]), parseInt(artButtonsDefaults[i]))
 
 					} else {
 
@@ -180,22 +158,7 @@ module.exports = {
 						receive(artButtonsDefaultsVars[i], parseInt(artButtonsDefaults[i]))
 
 						if (parseInt(artButtonsDefaults[i]) !== 0) {
-
-							sendOsc({
-								address: artButtonsTypes[i],
-								args: [{
-									type: 'i',
-									value: 1
-								}, {
-									type: 'i',
-									value: parseInt(artButtonsCodes[i])
-								}, {
-									type: 'i',
-									value: parseInt(artButtonsDefaults[i])
-								}],
-								host: 'midi',
-								port: 'OSC4' //OSC4 means only Cubase will receive this command
-							})
+							send('midi', 'OSC4', String(artButtonsTypes[i]), 1, parseInt(artButtonsCodes[i]), parseInt(artButtonsDefaults[i]))
 
 						} else {
 
