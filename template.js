@@ -2,12 +2,15 @@ module.exports = {
 
   oscInFilter: function(data) {
 
+    // TODO: find away to have atom beautify ignore the objects from OSC so the "var {} = data" bit could be on one line (this happens in other situations)
     var {
       address,
       args,
       host,
       port
     } = data
+
+    // TODO: control for autoUpdateTracks button. essentially, I don't necessarily want the faders and articulation buttons to update automatically. there should be an option. beyond this, there should be an option to update (auto and not) the buttons and faders to whatever is currently on the track. i.e. MIDI chase
 
     // var autoUpdateTracks = []
     //
@@ -17,13 +20,14 @@ module.exports = {
     // if (port === 'OSC2' && address === '/control' && args[1].value === 127 && args[2].value == 0){
     //     autoUpdateTracks[0] = 0
     // }
+    //1) if there is no data on the track where selected, set the faders to these defaults and send CC (will also be in flag)
+    //2) if there is data on the track, set the faders to whatever is on the track where selected and send CC. this has been most difficult so far, the MIDI monitor in Cubase seems to always cause a feedback loop. Also, I need to come up with a way to get a MIDI signal if I select a track that is not MIDI, i.e. instrument, audio, marker, tracks, etc.
+
+
 
     if (address === '/control' && args[1].value === 126 && args[2].value !== 0) {
       send('midi', 'OSC4', '/control', 1, 127, 127)
     }
-
-    //1) if there is no data on the track where selected, set the faders to these defaults and send CC (will also be in flag)
-    //2) if there is data on the track, set the faders to whatever is on the track where selected and send CC. this has been most difficult so far, the MIDI monitor in Cubase seems to always cause a feedback loop. Also, I need to come up with a way to get a MIDI signal if I select a track that is not MIDI, i.e. instrument, audio, marker, tracks, etc.
 
     var tracks = loadJSON('../OSC_CustomModules/tracks.json')
 
@@ -33,7 +37,7 @@ module.exports = {
       var y = args[2].value
 
       x = (x * 128) + y
-
+      // TODO: this all needs to be a bunch of for loops
       //READ JSON
       var tn = tracks[x].Track
       var a1 = parseInt(tracks[x].A1)
