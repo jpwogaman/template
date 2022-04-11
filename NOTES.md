@@ -36,7 +36,7 @@
     - [ ] re-label buttons in excel
     - [ ] remove the scripting from the buttons in OSC
 
-- [ ] make the CC Faders page the main tab for as opposed to a modal, all of the other buttons could either be a modal or a different tab. I don't like the delay when trying to click something out of the modal.
+- [x] make the CC Faders page the main tab for as opposed to a modal, all of the other buttons could either be a modal or a different tab. I don't like the delay when trying to click something out of the modal.
 
 ## Instruments
 
