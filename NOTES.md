@@ -3,7 +3,7 @@
 
 ## OSC
 
-- [ ] design interface for adding new tracks
+- [x] design interface for adding new tracks
 - [ ] fix that one stupid color: '/Art1' when set to null
 
 - [ ] create a panner reset
@@ -41,7 +41,7 @@
 ## Instruments
 
 - [ ] make sure CSS is working perfectly
-    - [ ] CC5 back to CC1
-    - [ ] see if disabling "EXT" in Kontakt disables the tempo sync for measured tremolos. might be a better fix overall
+    - [x] CC5 back to CC1 - I also reset the CC38 back to CC58
+    - [x] see if disabling "EXT" in Kontakt disables the tempo sync for measured tremolos. might be a better fix overall - DOES NOT DISABLE TEMPO SYNC!
 
-- [ ] configure pan & levels for harp, strings, section piano, brass 
+- [ ] configure pan & levels for harp, strings, section piano, brass
