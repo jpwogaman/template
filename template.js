@@ -1,13 +1,21 @@
+var autoUpdate = 1
+
 module.exports = {
 
 	oscInFilter: function(data) {
 
+		console.log(autoUpdate)
+
 		var { address, args, host, port } = data;
 
-		if (address === "/control" && args[1].value === 126 && args[2].value !== 0) {
+		if (address === "/control" && args[1].value === 127 && args[2].value === 1) {
+			autoUpdate = 1
+		} else if (address === "/control" && args[1].value === 127 && args[2].value === 0) {
+			autoUpdate = 0
+		} else {}
 
+		if (autoUpdate == 1 && address === "/control" && args[1].value === 126 && args[2].value !== 0) {
 			send("midi", "OSC4", "/control", 1, 127, 127);
-
 		}
 
 		var tracks = loadJSON("../template/tracks.json");
