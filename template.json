@@ -9995,8 +9995,8 @@
               },
               {
                 "type": "button",
-                "top": 910,
-                "left": 410,
+                "top": 870,
+                "left": 280,
                 "lock": false,
                 "id": "auto-monitor",
                 "visible": true,
