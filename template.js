@@ -1,24 +1,78 @@
 var autoUpdate = 1
+var midiMonitor = 0
+var monitorTimeOut = 0
 
 module.exports = {
 
 	oscInFilter: function(data) {
 
-		console.log(autoUpdate)
-
 		var { address, args, host, port } = data;
 
-		if (address === "/control" && args[1].value === 127 && args[2].value === 1) {
+		var tracks = loadJSON("../template/tracks.json");
+
+		var artButtonsNamesVars = [];
+		var artButtonsModesAVars = [];
+		var artButtonsModesBVars = [];
+		var artButtonsTypesVars = [];
+		var artButtonsCodesVars = [];
+		var artButtonsColorsVars = [];
+		var artButtonsDefaultsVars = [];
+		var artButtonsOnsVars = [];
+		var artButtonsOffsVars = [];
+		var artButtonsInputsVars = [];
+
+		var fadCodesVars = [];
+		var fadDefaultsVars = [];
+		var fadNamesVars = [];
+		var fadIDsVars = [];
+
+		var artButtonsNames = [];
+		var artButtonsTypes = [];
+		var artButtonsCodes = [];
+		var artButtonsDefaults = [];
+		var artButtonsOns = [];
+		var artButtonsOffs = [];
+		var artButtonsInputs = [];
+
+		var fadCodes = [];
+		var fadDefaults = [];
+		var fadNames = [];
+
+		if (address === "/control" && port == 'OSC2' & args[1].value === 127 && args[2].value === 1) {
 			autoUpdate = 1
-		} else if (address === "/control" && args[1].value === 127 && args[2].value === 0) {
+			midiMonitor = 0
+		} else if (address === "/control" && port == 'OSC2' && args[1].value === 127 && args[2].value === 0) {
 			autoUpdate = 0
 		} else {}
 
-		if (autoUpdate == 1 && address === "/control" && args[1].value === 126 && args[2].value !== 0) {
+		if (address === "/control" && port == 'OSC2' && args[1].value === 126 && args[2].value === 1) {
+			midiMonitor = 1
+			autoUpdate = 0
+		} else if (address === "/control" && port == 'OSC2' && args[1].value === 126 && args[2].value === 0) {
+			midiMonitor = 0
+		} else {}
+
+		if (autoUpdate === 1 && address === "/control" && args[1].value === 126 && args[2].value !== 0) {
 			send("midi", "OSC4", "/control", 1, 127, 127);
 		}
 
-		var tracks = loadJSON("../template/tracks.json");
+
+		//seems like Cubase is always going to chase what is on the track? will always SOUND like what is on the track, anyways. just won't always display correctly.. strange
+
+		if (midiMonitor === 1 && port == 'OSC2' && args[1].value !== 126 && args[1].value !== 127) {
+
+			if (monitorTimeOut !== 1 && address === "/control") {
+
+				send("midi", "OSC3", "/control", ...args)
+				monitorTimeOut = 1 //console will go CRAZY if this is not here...don't think this is the answer here but hmmmmmm. just want it to display what's on the track if I select "Auto Monitor"
+				console.log(monitorTimeOut)
+				setTimeout(function() {
+					monitorTimeOut = 0
+					console.log(monitorTimeOut)
+				}, 500)
+			}
+
+		}
 
 		if (address === "/key_pressure") {
 
@@ -29,34 +83,6 @@ module.exports = {
 			receive("/selectedTrackName", tracks[x].Track);
 
 			tracks = [tracks[x]];
-
-			var artButtonsNamesVars = [];
-			var artButtonsModesAVars = [];
-			var artButtonsModesBVars = [];
-			var artButtonsTypesVars = [];
-			var artButtonsCodesVars = [];
-			var artButtonsColorsVars = [];
-			var artButtonsDefaultsVars = [];
-			var artButtonsOnsVars = [];
-			var artButtonsOffsVars = [];
-			var artButtonsInputsVars = [];
-
-			var fadCodesVars = [];
-			var fadDefaultsVars = [];
-			var fadNamesVars = [];
-			var fadIDsVars = [];
-
-			var artButtonsNames = [];
-			var artButtonsTypes = [];
-			var artButtonsCodes = [];
-			var artButtonsDefaults = [];
-			var artButtonsOns = [];
-			var artButtonsOffs = [];
-			var artButtonsInputs = [];
-
-			var fadCodes = [];
-			var fadDefaults = [];
-			var fadNames = [];
 
 			for (var key in tracks) {
 
@@ -110,15 +136,14 @@ module.exports = {
 					}
 				}
 			}
+
 			for (let i = 0; i < 8; i++) {
 
 				fadCodesVars[i] = "/CC" + (i + 1) + "_increment_value";
-				// fadDefaultsVars[i] = "/CC_Preset_CC" + (i + 1) + "_Default"; //might not need this at all
 				fadNamesVars[i] = "/CC" + (i + 1) + "_display_Setting";
 				fadIDsVars[i] = "/CC" + (i + 1) + "_fader"
 
 				receive(fadCodesVars[i], parseInt(fadCodes[i]));
-				// receive(fadDefaultsVars[i], parseInt(fadDefaults[i])); //might not need this at all
 				receive(fadNamesVars[i], fadNames[i]);
 				receive(fadIDsVars[i], parseInt(fadDefaults[i]));
 
