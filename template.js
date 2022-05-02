@@ -1,8 +1,25 @@
 var autoUpdate = 1
+var showCodes = 1
 var midiMonitor = 0
 var monitorTimeOut = 0
 
+const allNotes = ["C-2", "C#-2", "D-2", "D#-2", "E-2", "F-2", "F#-2", "G-2", "G#-2", "A-2", "A#-2", "B-2", "C-1", "C#-1", "D-1", "D#-1", "E-1", "F-1", "F#-1", "G-1", "G#-1", "A-1", "A#-1", "B-1", "C0", "C#0", "D0", "D#0", "E0", "F0", "F#0", "G0", "G#0", "A0", "A#0", "B0", "C1", "C#1", "D1", "D#1", "E1", "F1", "F#1", "G1", "G#1", "A1", "A#1", "B1", "C2", "C#2", "D2", "D#2", "E2", "F2", "F#2", "G2", "G#2", "A2", "A#2", "B2", "C3", "C#3", "D3", "D#3", "E3", "F3", "F#3", "G3", "G#3", "A3", "A#3", "B3", "C4", "C#4", "D4", "D#4", "E5", "F4", "F#4", "G4", "G#4", "A4", "A#4", "B4", "C5", "C#5", "D5", "D#5", "E5", "F5", "F#5", "G5", "G#5", "A5", "A#5", "B5", "C6", "C#6", "D6", "D#6", "E6", "F6", "F#6", "G6", "G#6", "A6", "A#6", "B6", "C7", "C#7", "D7", "D#7", "E7", "F7", "F#7", "G7", "G#7", "A7", "A#7", "B7", "C8", "C#8", "D8", "D#8", "E8", "F8", "F#8", "G8", "G#8", "A8", "A#8", "B8", "C9", "C#9", "D9", "D#9", "E9", "F9", "F#9", "G9"]
+
 module.exports = {
+
+	init: function() {
+
+		send("midi", "OSC1", "/control", 3, 17, 1); //grid 'whole notes' resets triplet/dotted
+		send("midi", "OSC1", "/control", 3, 25, 1); //reset grid/events to 'grid'
+		send("midi", "OSC1", "/control", 2, 9, 1); //reset SoundID/Control Room preset to 'A5X + SUB8'
+
+		setTimeout(() => {
+			//grid eighth notes
+			send("midi", "OSC1", "/control", 3, 20, 1);
+		}, 100)
+
+	},
+
 
 	oscInFilter: function(data) {
 
@@ -52,10 +69,17 @@ module.exports = {
 			midiMonitor = 0
 		} else {}
 
+		if (address === "/control" && port == 'OSC2' & args[1].value === 119 && args[2].value === 1) {
+			showCodes = 1
+			send("midi", "OSC4", "/control", 1, 127, 127);
+		} else if (address === "/control" && port == 'OSC2' && args[1].value === 119 && args[2].value === 0) {
+			showCodes = 0
+			send("midi", "OSC4", "/control", 1, 127, 127);
+		} else {}
+
 		if (autoUpdate === 1 && address === "/control" && args[1].value === 126 && args[2].value !== 0) {
 			send("midi", "OSC4", "/control", 1, 127, 127);
 		}
-
 
 		//seems like Cubase is always going to chase what is on the track? will always SOUND like what is on the track, anyways. just won't always display correctly.. strange
 
@@ -81,6 +105,7 @@ module.exports = {
 			x = x * 128 + y;
 
 			receive("/selectedTrackName", tracks[x].Track);
+			receive("/selectedTrackKeyRanges", tracks[x].Key_Ranges)
 
 			tracks = [tracks[x]];
 
@@ -170,7 +195,28 @@ module.exports = {
 				artButtonsOffsVars[i] = "/art" + (i + 1) + "off";
 				artButtonsInputsVars[i] = "/art" + (i + 1) + "input";
 
-				receive(artButtonsNamesVars[i], String(artButtonsNames[i]));
+				let x
+
+				if (String(artButtonsTypes[i]) === "/control") {
+					x = 'CC'
+				} else if (String(artButtonsTypes[i]) === "/note") {
+					x = allNotes[artButtonsCodes[i]] + '/'
+				} else {
+					x = ''
+				}
+
+				if (showCodes === 1) {
+					if (String(artButtonsNames[i]) !== "") {
+						receive(artButtonsNamesVars[i], String(artButtonsNames[i]) + ' (' + x + String(artButtonsCodes[i]) + '/' + parseInt(artButtonsOns[i]) + ')');
+					}
+				} else {
+					receive(artButtonsNamesVars[i], String(artButtonsNames[i]))
+				}
+
+				if (String(artButtonsNames[i]) === "") {
+					receive(artButtonsNamesVars[i], "null")
+				}
+
 				receive(artButtonsTypesVars[i], String(artButtonsTypes[i]));
 				receive(artButtonsCodesVars[i], parseInt(artButtonsCodes[i]));
 				receive(artButtonsDefaultsVars[i], parseInt(artButtonsDefaults[i]));
