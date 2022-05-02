@@ -28,6 +28,7 @@ module.exports = {
 		var tracks = loadJSON("../template/tracks.json");
 
 		var artButtonsNamesVars = [];
+		var artButtonsRangesVars = [];
 		var artButtonsModesAVars = [];
 		var artButtonsModesBVars = [];
 		var artButtonsTypesVars = [];
@@ -44,6 +45,7 @@ module.exports = {
 		var fadIDsVars = [];
 
 		var artButtonsNames = [];
+		var artButtonRanges = [];
 		var artButtonsTypes = [];
 		var artButtonsCodes = [];
 		var artButtonsDefaults = [];
@@ -105,14 +107,14 @@ module.exports = {
 			x = x * 128 + y;
 
 			receive("/selectedTrackName", tracks[x].Track);
-			receive("/selectedTrackKeyRanges", tracks[x].Key_Ranges)
+			receive("/selectedTrackKeyRanges", tracks[x].Key_FullRanges)
 
-			tracks = [tracks[x]];
+			trackArrays = [tracks[x]];
 
-			for (var key in tracks) {
+			for (var key in trackArrays) {
 
-				if (!tracks.hasOwnProperty(key)) continue;
-				var obj = tracks[key];
+				if (!trackArrays.hasOwnProperty(key)) continue;
+				var obj = trackArrays[key];
 
 				for (var prop in obj) {
 
@@ -121,6 +123,10 @@ module.exports = {
 					if (prop.includes("_Name")) {
 
 						artButtonsNames.push(obj[prop]);
+
+					} else if (prop.includes("_Range")) {
+
+						artButtonRanges.push(obj[prop]);
 
 					} else if (prop.includes("_Type")) {
 
@@ -185,6 +191,7 @@ module.exports = {
 			for (let i = 0; i < 18; i++) {
 
 				artButtonsNamesVars[i] = "/art" + (i + 1) + "name";
+				artButtonsRangesVars[i] = "/art" + (i + 1) + "range";
 				artButtonsModesAVars[i] = "/art" + (i + 1) + "modeA";
 				artButtonsModesBVars[i] = "/art" + (i + 1) + "modeB";
 				artButtonsTypesVars[i] = "/art" + (i + 1) + "type";
@@ -195,40 +202,42 @@ module.exports = {
 				artButtonsOffsVars[i] = "/art" + (i + 1) + "off";
 				artButtonsInputsVars[i] = "/art" + (i + 1) + "input";
 
-				let x
+				let z
 
 				if (String(artButtonsTypes[i]) === "/control") {
-					x = 'CC'
+					z = 'CC'
 				} else if (String(artButtonsTypes[i]) === "/note") {
-					x = allNotes[artButtonsCodes[i]] + '/'
+					z = allNotes[artButtonsCodes[i]] + '/'
 				} else {
-					x = ''
+					z = ''
 				}
 
 				if (showCodes === 1) {
 					if (String(artButtonsNames[i]) !== "") {
-						receive(artButtonsNamesVars[i], String(artButtonsNames[i]) + ' (' + x + String(artButtonsCodes[i]) + '/' + parseInt(artButtonsOns[i]) + ')');
+						receive(artButtonsNamesVars[i], String(artButtonsNames[i]) + ' (' + z + String(artButtonsCodes[i]) + '/' + parseInt(artButtonsOns[i]) + ')')
 					}
 				} else {
 					receive(artButtonsNamesVars[i], String(artButtonsNames[i]))
 				}
 
-				if (String(artButtonsNames[i]) === "") {
-					receive(artButtonsNamesVars[i], "null")
+				if (String(artButtonRanges[i]) === "") {
+					receive(artButtonsRangesVars[i], "")
+				} else {
+					receive(artButtonsRangesVars[i], String(artButtonRanges[i]))
 				}
 
-				receive(artButtonsTypesVars[i], String(artButtonsTypes[i]));
-				receive(artButtonsCodesVars[i], parseInt(artButtonsCodes[i]));
-				receive(artButtonsDefaultsVars[i], parseInt(artButtonsDefaults[i]));
-				receive(artButtonsOnsVars[i], parseInt(artButtonsOns[i]));
-				receive(artButtonsOffsVars[i], parseInt(artButtonsOffs[i]));
-				receive(artButtonsModesAVars[i], 0.15); // reset
-				receive(artButtonsModesBVars[i], 0.15); // reset
+				receive(artButtonsTypesVars[i], String(artButtonsTypes[i]))
+				receive(artButtonsCodesVars[i], parseInt(artButtonsCodes[i]))
+				receive(artButtonsDefaultsVars[i], parseInt(artButtonsDefaults[i]))
+				receive(artButtonsOnsVars[i], parseInt(artButtonsOns[i]))
+				receive(artButtonsOffsVars[i], parseInt(artButtonsOffs[i]))
+				receive(artButtonsModesAVars[i], 0.15) // reset
+				receive(artButtonsModesBVars[i], 0.15) // reset
 
 				//NESTED IF'S PROBABLY NOT GREAT IDEA
 
-				if (artButtonsNames[i] === "") {
-
+				if (String(artButtonsNames[i]) === "") {
+					receive(artButtonsNamesVars[i], "")
 					receive(artButtonsInputsVars[i], "true");
 					receive(artButtonsColorsVars[i], "#A9A9A9");
 
@@ -250,6 +259,7 @@ module.exports = {
 
 							receive(artButtonsModesAVars[i], 0.75);
 							send("midi", "OSC4", String(artButtonsTypes[i]), 1, parseInt(artButtonsCodes[i]), parseInt(artButtonsDefaults[i]));
+							receive("/selectedTrackKeyRanges", artButtonRanges[i])
 
 						} else {
 
