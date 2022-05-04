@@ -20,7 +20,6 @@ module.exports = {
 
 	},
 
-
 	oscInFilter: function(data) {
 
 		var { address, args, host, port } = data;
@@ -79,6 +78,12 @@ module.exports = {
 			send("midi", "OSC4", "/control", 1, 127, 127);
 		} else {}
 
+		if (autoUpdate === 1) {
+			receive('/trackNameColor', '#70b7ff')
+		} else if (autoUpdate === 0) {
+			receive('/trackNameColor', 'red')
+		}
+
 		if (autoUpdate === 1 && address === "/control" && args[1].value === 126 && args[2].value !== 0) {
 			send("midi", "OSC4", "/control", 1, 127, 127);
 		}
@@ -95,9 +100,8 @@ module.exports = {
 				setTimeout(function() {
 					monitorTimeOut = 0
 					console.log(monitorTimeOut)
-				}, 500)
+				}, 2000)
 			}
-
 		}
 
 		if (address === "/key_pressure") {
