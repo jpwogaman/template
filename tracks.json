@@ -14419,7 +14419,7 @@
       "Art4_ModeB": "",
       "Art4_Type": "/control",
       "Art4_Code": 3,
-      "Art4_Default": 0,
+      "Art4_Default": 33,
       "Art4_On": 33,
       "Art4_Off": false,
       "Art5_Name": "Short 1/4",
