@@ -1,4 +1,4 @@
-var autoUpdate = 1
+var autoUpdate = 0
 var showCodes = 1
 var midiMonitor = 0
 var monitorTimeOut = 0
