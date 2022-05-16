@@ -191,6 +191,13 @@ module.exports = {
 					continue;
 
 				}
+				if (fadCodes[4] !== null) {
+					receive('/faderPanel-color-2', "1px solid red")
+				} else {
+					receive('/faderPanel-color-2', "")
+				}
+
+
 			}
 			for (let i = 0; i < 18; i++) {
 
