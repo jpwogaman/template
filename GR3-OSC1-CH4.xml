@@ -60,6 +60,7 @@
 <ctrl><name>Show all VEP outs</name><stat>176</stat><chan>3</chan><addr>57</addr><max>127</max><flags>1</flags></ctrl>
 <ctrl><name>Hide all MIDI tracks</name><stat>176</stat><chan>3</chan><addr>58</addr><max>127</max><flags>1</flags></ctrl>
 <ctrl><name>Show all MIDI tracks</name><stat>176</stat><chan>3</chan><addr>59</addr><max>127</max><flags>1</flags></ctrl>
+<ctrl><name>Select all Device Tracks</name><stat>176</stat><chan>3</chan><addr>60</addr><max>127</max><flags>1</flags></ctrl>
 </ctrltable>
 <bank name="OSC4 - Project Window">
 <entry ctrl="Toggle Event Names">
@@ -238,6 +239,9 @@
 </entry>
 <entry ctrl="Show all MIDI tracks">
 <command><category>Process Project Logical Editor</category><action>show all MIDI and Instrument Tracks</action><flags>1</flags></command>
+</entry>
+<entry ctrl="Select all Device Tracks">
+<command><category>Process Project Logical Editor</category><action>select all VEP outs (devices)</action><flags>1</flags></command>
 </entry>
 </bank>
 </remotedescription>
