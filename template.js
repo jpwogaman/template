@@ -203,6 +203,12 @@ module.exports = {
 		// 	receive("/selectedTrackName", tracks[x].Track)
 		// 	receive("/selectedTrackKeyRanges", tracks[x].Key_FullRanges)
 		//
+		// 	if (tracks[x].Art3_Range === "") {
+		// 		var z = tracks[x].Key_FullRanges
+		// 		receive('/keyRangeVar1', z)
+		// 		receive('/keyRangeScript', 1)
+		// 	}
+		//
 		// 	for (let i = 0; i < 8; i++) {
 		//
 		// 		y = x * 7 + (x + i)
@@ -288,7 +294,12 @@ module.exports = {
 		//
 		// 					receive(artButtonsModesAVars[i], 0.75)
 		// 					send("midi", "OSC4", String(artButtonsTypes[y]), 1, parseInt(artButtonsCodes[y]), parseInt(artButtonsDefaults[y]))
-		// 					receive("/selectedTrackKeyRanges", artButtonRanges[y])
+		//
+		// 					if (i > 1) {
+		//						z = artButtonRanges[i]
+		//						receive('/keyRangeVar1', z)
+		//						receive('/keyRangeScript', 1)
+		//					}
 		//
 		// 				} else {
 		//
@@ -431,7 +442,7 @@ module.exports = {
 				} else {
 					receive(artButtonsRangesVars[i], String(artButtonRanges[i]))
 				}
-
+				
 				receive(artButtonsTypesVars[i], String(artButtonsTypes[i]))
 				receive(artButtonsCodesVars[i], parseInt(artButtonsCodes[i]))
 				receive(artButtonsDefaultsVars[i], parseInt(artButtonsDefaults[i]))
