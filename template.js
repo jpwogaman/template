@@ -260,10 +260,8 @@ module.exports = {
 						if (defa !== 0) {
 							receive(modeAVar, 0.75)
 							send("midi", "OSC4", type, 1, code, defa)
-							if (i > 1) {
-								receive('/keyRangeVar1', range)
-								receive('/keyRangeScript', 1)
-							}
+							receive('/keyRangeVar1', range)
+							receive('/keyRangeScript', 1)
 						}
 					}
 				}
