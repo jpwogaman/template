@@ -15,6 +15,17 @@ var fadCodesVars = []
 var fadDefaultsVars = []
 var fadNamesVars = []
 var fadIDsVars = []
+var artButtonsNames = []
+var artButtonRanges = []
+var artButtonsTypes = []
+var artButtonsCodes = []
+var artButtonsDefaults = []
+var artButtonsOns = []
+var artButtonsOffs = []
+var artButtonsInputs = []
+var fadCodes = []
+var fadDefaults = []
+var fadNames = []
 
 for (let i = 0; i < 18; i++) {
 	artButtonsNamesVars[i] = "/art" + (i + 1) + "name"
@@ -35,18 +46,6 @@ for (let i = 0; i < 8; i++) {
 	fadNamesVars[i] = "/CC" + (i + 1) + "_display_Setting"
 	fadIDsVars[i] = "/CC" + (i + 1) + "_fader"
 }
-
-var artButtonsNames = []
-var artButtonRanges = []
-var artButtonsTypes = []
-var artButtonsCodes = []
-var artButtonsDefaults = []
-var artButtonsOns = []
-var artButtonsOffs = []
-var artButtonsInputs = []
-var fadCodes = []
-var fadDefaults = []
-var fadNames = []
 
 for (i in tracks) {
 	trackArrays = [tracks[i]]
