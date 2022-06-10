@@ -27,23 +27,23 @@ var fadDefts____ = []
 var fadNames____ = []
 
 for (let i = 0; i < 18; i++) {
-	artNamesVars[i] = "/artname_" + i + 1
-	artRangsVars[i] = "/artrang_" + i + 1
-	artModsAVars[i] = "/artmodA_" + i + 1
-	artModsBVars[i] = "/artmodB_" + i + 1
-	artTypesVars[i] = "/arttype_" + i + 1
-	artCodesVars[i] = "/artcode_" + i + 1
-	artColrsVars[i] = "/artcolr_" + i + 1
-	artDeftsVars[i] = "/artdeft_" + i + 1
-	artOns__Vars[i] = "/arton___" + i + 1
-	artOffs_Vars[i] = "/artoff__" + i + 1
-	artInptsVars[i] = "/artinpt_" + i + 1
+	artNamesVars[i] = "/artname_" + parseInt(i + 1)
+	artRangsVars[i] = "/artrang_" + parseInt(i + 1)
+	artModsAVars[i] = "/artmodA_" + parseInt(i + 1)
+	artModsBVars[i] = "/artmodB_" + parseInt(i + 1)
+	artTypesVars[i] = "/arttype_" + parseInt(i + 1)
+	artCodesVars[i] = "/artcode_" + parseInt(i + 1)
+	artColrsVars[i] = "/artcolr_" + parseInt(i + 1)
+	artDeftsVars[i] = "/artdeft_" + parseInt(i + 1)
+	artOns__Vars[i] = "/arton___" + parseInt(i + 1)
+	artOffs_Vars[i] = "/artoff__" + parseInt(i + 1)
+	artInptsVars[i] = "/artinpt_" + parseInt(i + 1)
 }
 
 for (let i = 0; i < 8; i++) {
-	fadCodesVars[i] = "/CC_incr_" + i + 1
-	fadNamesVars[i] = "/CC_disp_" + i + 1
-	fadIDs__Vars[i] = "/CC_fad__" + i + 1
+	fadCodesVars[i] = "/CC_incr_" + parseInt(i + 1)
+	fadNamesVars[i] = "/CC_disp_" + parseInt(i + 1)
+	fadIDs__Vars[i] = "/CC_fad__" + parseInt(i + 1)
 }
 
 for (i in tracks) {
@@ -54,7 +54,7 @@ for (i in tracks) {
 		for (var prop in obj) {
 			if (!obj.hasOwnProperty(prop)) continue;
 			if (prop.includes("_Name")) {
-				fadCodes____.push(obj[prop])
+				artNames____.push(obj[prop])
 			} else if (prop.includes("_Range")) {
 				artRangs____.push(obj[prop])
 			} else if (prop.includes("_Type")) {
