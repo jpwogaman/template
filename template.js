@@ -1,19 +1,19 @@
 var tracks = loadJSON("../template/tracks.json")
 const allNotes = ["C-2", "C#-2", "D-2", "D#-2", "E-2", "F-2", "F#-2", "G-2", "G#-2", "A-2", "A#-2", "B-2", "C-1", "C#-1", "D-1", "D#-1", "E-1", "F-1", "F#-1", "G-1", "G#-1", "A-1", "A#-1", "B-1", "C0", "C#0", "D0", "D#0", "E0", "F0", "F#0", "G0", "G#0", "A0", "A#0", "B0", "C1", "C#1", "D1", "D#1", "E1", "F1", "F#1", "G1", "G#1", "A1", "A#1", "B1", "C2", "C#2", "D2", "D#2", "E2", "F2", "F#2", "G2", "G#2", "A2", "A#2", "B2", "C3", "C#3", "D3", "D#3", "E3", "F3", "F#3", "G3", "G#3", "A3", "A#3", "B3", "C4", "C#4", "D4", "D#4", "E4", "F4", "F#4", "G4", "G#4", "A4", "A#4", "B4", "C5", "C#5", "D5", "D#5", "E5", "F5", "F#5", "G5", "G#5", "A5", "A#5", "B5", "C6", "C#6", "D6", "D#6", "E6", "F6", "F#6", "G6", "G#6", "A6", "A#6", "B6", "C7", "C#7", "D7", "D#7", "E7", "F7", "F#7", "G7", "G#7", "A7", "A#7", "B7", "C8", "C#8", "D8", "D#8", "E8", "F8", "F#8", "G8", "G#8", "A8", "A#8", "B8", "C9", "C#9", "D9", "D#9", "E9", "F9", "F#9", "G9"]
-var artButtonsNamesVars = []
-var artButtonsRangesVars = []
-var artButtonsModesAVars = []
-var artButtonsModesBVars = []
-var artButtonsTypesVars = []
-var artButtonsCodesVars = []
-var artButtonsColorsVars = []
-var artButtonsDefaultsVars = []
-var artButtonsOnsVars = []
-var artButtonsOffsVars = []
-var artButtonsInputsVars = []
+var artNamesVars = []
+var artRangsVars = []
+var artModsAVars = []
+var artModsBVars = []
+var artTypesVars = []
+var artCodesVars = []
+var artColrsVars = []
+var artDeftsVars = []
+var artOns__Vars = []
+var artOffs_Vars = []
+var artInptsVars = []
 var fadCodesVars = []
-var fadDefaultsVars = []
 var fadNamesVars = []
+<<<<<<< HEAD
 var fadIDsVars = []
 var artButtonsNames = []
 var artButtonRanges = []
@@ -26,25 +26,39 @@ var artButtonsInputs = []
 var fadCodes = []
 var fadDefaults = []
 var fadNames = []
+=======
+var fadIDs__Vars = []
+var artNames____ = []
+var artRangs____ = []
+var artTypes____ = []
+var artCodes____ = []
+var artDefts____ = []
+var artOns______ = []
+var artOffs_____ = []
+var artInpts____ = []
+var fadCodes____ = []
+var fadDefts____ = []
+var fadNames____ = []
+>>>>>>> newVars
 
 for (let i = 0; i < 18; i++) {
-	artButtonsNamesVars[i] = "/art" + (i + 1) + "name"
-	artButtonsRangesVars[i] = "/art" + (i + 1) + "range"
-	artButtonsModesAVars[i] = "/art" + (i + 1) + "modeA"
-	artButtonsModesBVars[i] = "/art" + (i + 1) + "modeB"
-	artButtonsTypesVars[i] = "/art" + (i + 1) + "type"
-	artButtonsCodesVars[i] = "/art" + (i + 1) + "code"
-	artButtonsColorsVars[i] = "/art" + (i + 1) + "color"
-	artButtonsDefaultsVars[i] = "/art" + (i + 1) + "default"
-	artButtonsOnsVars[i] = "/art" + (i + 1) + "on"
-	artButtonsOffsVars[i] = "/art" + (i + 1) + "off"
-	artButtonsInputsVars[i] = "/art" + (i + 1) + "input"
+	artNamesVars[i] = "/artname_" + parseInt(i + 1)
+	artRangsVars[i] = "/artrang_" + parseInt(i + 1)
+	artModsAVars[i] = "/artmodA_" + parseInt(i + 1)
+	artModsBVars[i] = "/artmodB_" + parseInt(i + 1)
+	artTypesVars[i] = "/arttype_" + parseInt(i + 1)
+	artCodesVars[i] = "/artcode_" + parseInt(i + 1)
+	artColrsVars[i] = "/artcolr_" + parseInt(i + 1)
+	artDeftsVars[i] = "/artdeft_" + parseInt(i + 1)
+	artOns__Vars[i] = "/arton___" + parseInt(i + 1)
+	artOffs_Vars[i] = "/artoff__" + parseInt(i + 1)
+	artInptsVars[i] = "/artinpt_" + parseInt(i + 1)
 }
 
 for (let i = 0; i < 8; i++) {
-	fadCodesVars[i] = "/CC" + (i + 1) + "_increment_value"
-	fadNamesVars[i] = "/CC" + (i + 1) + "_display_Setting"
-	fadIDsVars[i] = "/CC" + (i + 1) + "_fader"
+	fadCodesVars[i] = "/CC_incr_" + parseInt(i + 1)
+	fadNamesVars[i] = "/CC_disp_" + parseInt(i + 1)
+	fadIDs__Vars[i] = "/CC_fad__" + parseInt(i + 1)
 }
 
 for (i in tracks) {
@@ -55,25 +69,25 @@ for (i in tracks) {
 		for (var prop in obj) {
 			if (!obj.hasOwnProperty(prop)) continue;
 			if (prop.includes("_Name")) {
-				artButtonsNames.push(obj[prop])
+				artNames____.push(obj[prop])
 			} else if (prop.includes("_Range")) {
-				artButtonRanges.push(obj[prop])
+				artRangs____.push(obj[prop])
 			} else if (prop.includes("_Type")) {
-				artButtonsTypes.push(obj[prop])
+				artTypes____.push(obj[prop])
 			} else if (prop.includes("_Code")) {
-				artButtonsCodes.push(obj[prop])
+				artCodes____.push(obj[prop])
 			} else if (prop.includes("_Default")) {
-				artButtonsDefaults.push(obj[prop])
+				artDefts____.push(obj[prop])
 			} else if (prop.includes("_On")) {
-				artButtonsOns.push(obj[prop])
+				artOns______.push(obj[prop])
 			} else if (prop.includes("_Off")) {
-				artButtonsOffs.push(obj[prop])
+				artOffs_____.push(obj[prop])
 			} else if (prop.includes("FadA")) {
-				fadCodes.push(obj[prop])
+				fadCodes____.push(obj[prop])
 			} else if (prop.includes("FadB")) {
-				fadDefaults.push(obj[prop])
+				fadDefts____.push(obj[prop])
 			} else if (prop.includes("FadC")) {
-				fadNames.push(obj[prop])
+				fadNames____.push(obj[prop])
 			} else continue
 		}
 	}
@@ -165,30 +179,30 @@ module.exports = {
 			receive("/selectedTrackName", tracks[x].Track)
 			receive("/selectedTrackKeyRanges", fullRange)
 
-			if (tracks[x].Art3_Range === "") {
+			if (tracks[x].Art3_rang___ === "") {
 				receive('/keyRangeVar1', fullRange)
 				receive('/keyRangeScript', 1)
 			}
 
 			for (let i = 0; i < 8; i++) {
 				var y = x * 8 + i
-				let idVar = fadIDsVars[i]
+				let id__Var = fadIDs__Vars[i]
 				let nameVar = fadNamesVars[i]
 				let codeVar = fadCodesVars[i]
-				let name = fadNames[y]
-				let code = parseInt(fadCodes[y])
-				let defa = parseInt(fadDefaults[y])
-				let fadPage2 = fadCodes[4]
+				let name___ = fadNames____[y]
+				let code___ = parseInt(fadCodes____[y])
+				let deft___ = parseInt(fadDefts____[y])
+				let fadPge2 = fadCodes____[4]
 
-				receive(codeVar, code)
-				receive(nameVar, name)
-				receive(idVar, defa)
+				receive(codeVar, code___)
+				receive(nameVar, name___)
+				receive(id__Var, deft___)
 
-				if (code !== null) {
-					send("midi", "OSC4", "/control", 1, code, defa)
+				if (code___ !== null) {
+					send("midi", "OSC4", "/control", 1, code___, deft___)
 				} else continue
 
-				if (fadPage2 !== null) {
+				if (fadPge2 !== null) {
 					receive('/faderPanel-color-2', "1px solid red")
 				} else {
 					receive('/faderPanel-color-2', "")
@@ -197,69 +211,69 @@ module.exports = {
 			for (let i = 0; i < 18; i++) {
 				var y = x * 18 + i
 				let zz
-				let typeVar = artButtonsTypesVars[i]
-				let codeVar = artButtonsCodesVars[i]
-				let nameVar = artButtonsNamesVars[i]
-				let rangeVar = artButtonsRangesVars[i]
-				let defaVar = artButtonsDefaultsVars[i]
-				let onVar = artButtonsOnsVars[i]
-				let offVar = artButtonsOffsVars[i]
-				let modeAVar = artButtonsModesAVars[i]
-				let modeBVar = artButtonsModesBVars[i]
-				let inputVar = artButtonsInputsVars[i]
-				let colorVar = artButtonsColorsVars[i]
-				let name = artButtonsNames[y]
-				let type = artButtonsTypes[y]
-				let range = String(artButtonRanges[y])
-				let code = parseInt(artButtonsCodes[y])
-				let on = parseInt(artButtonsOns[y])
-				let off = parseInt(artButtonsOffs[y])
-				let defa = parseInt(artButtonsDefaults[y])
+				let typeVar = artTypesVars[i]
+				let codeVar = artCodesVars[i]
+				let nameVar = artNamesVars[i]
+				let rangVar = artRangsVars[i]
+				let deftVar = artDeftsVars[i]
+				let on__Var = artOns__Vars[i]
+				let off_Var = artOffs_Vars[i]
+				let modAVar = artModsAVars[i]
+				let modBVar = artModsBVars[i]
+				let inptVar = artInptsVars[i]
+				let colrVar = artColrsVars[i]
+				let name___ = artNames____[y]
+				let type___ = artTypes____[y]
+				let rang___ = String(artRangs____[y])
+				let code___ = parseInt(artCodes____[y])
+				let on_____ = parseInt(artOns______[y])
+				let off____ = parseInt(artOffs_____[y])
+				let deft___ = parseInt(artDefts____[y])
 
-				if (type === "/control") {
+				if (type___ === "/control") {
 					zz = 'CC'
-				} else if (type === "/note") {
-					zz = allNotes[code] + '/'
+				} else if (type___ === "/note") {
+					zz = allNotes[code___] + '/'
 				} else {
 					zz = ''
 				}
 
-				if (showCodes && name != "") {
-					receive(nameVar, name + ' (' + zz + code + '/' + on + ')')
+				if (showCodes && name___ != "") {
+					receive(nameVar, name___ + ' (' + zz + code___ + '/' + on_____ + ')')
 				} else {
-					receive(nameVar, name)
+					receive(nameVar, name___)
 				}
 
-				if (range === "") {
-					receive(rangeVar, " ")
+				if (rang___ === "") {
+					receive(rangVar, " ")
 				} else {
-					receive(rangeVar, range)
+					receive(rangVar, rang___)
 				}
 
-				receive(typeVar, type)
-				receive(codeVar, code)
-				receive(defaVar, defa)
-				receive(onVar, on)
-				receive(offVar, off)
-				receive(modeAVar, 0.15)
-				receive(modeBVar, 0.15)
+				receive(typeVar, type___)
+				receive(codeVar, code___)
+				receive(deftVar, deft___)
+				receive(on__Var, on_____)
+				receive(off_Var, off____)
+				receive(modAVar, 0.15)
+				receive(modBVar, 0.15)
 
-				if (name === "") {
+				if (name___ === "") {
 					receive(nameVar, " ")
-					receive(inputVar, "true")
-					receive(colorVar, "#A9A9A9")
+					receive(inptVar, "true")
+					receive(colrVar, "#A9A9A9")
 				} else {
-					receive(inputVar, "false")
+					receive(inptVar, "false")
 					if (i <= 1) {
-						receive(colorVar, "#a86739")
-						send("midi", "OSC3", type, 1, code, defa)
+						receive(colrVar, "#a86739")
+						send("midi", "OSC3", type___, 1, code___, deft___)
 					} else {
-						receive(colorVar, "#6dfdbb")
-						receive(defaVar, defa)
-						if (defa !== 0) {
-							receive(modeAVar, 0.75)
-							send("midi", "OSC4", type, 1, code, defa)
-							receive('/keyRangeVar1', range)
+						receive(colrVar, "#6dfdbb")
+						receive(deftVar, deft___)
+						if (deft___ !== 0) {
+							receive(modAVar, 0.75)
+							send("midi", "OSC4", type___, 1, code___, deft___)
+							receive('/keyRangeVar1', rang___)
 							receive('/keyRangeScript', 1)
 						}
 					}
