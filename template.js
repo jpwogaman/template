@@ -13,20 +13,6 @@ var artOffs_Vars = []
 var artInptsVars = []
 var fadCodesVars = []
 var fadNamesVars = []
-<<<<<<< HEAD
-var fadIDsVars = []
-var artButtonsNames = []
-var artButtonRanges = []
-var artButtonsTypes = []
-var artButtonsCodes = []
-var artButtonsDefaults = []
-var artButtonsOns = []
-var artButtonsOffs = []
-var artButtonsInputs = []
-var fadCodes = []
-var fadDefaults = []
-var fadNames = []
-=======
 var fadIDs__Vars = []
 var artNames____ = []
 var artRangs____ = []
@@ -39,7 +25,6 @@ var artInpts____ = []
 var fadCodes____ = []
 var fadDefts____ = []
 var fadNames____ = []
->>>>>>> newVars
 
 for (let i = 0; i < 18; i++) {
 	artNamesVars[i] = "/artname_" + parseInt(i + 1)
