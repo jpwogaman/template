@@ -8,6 +8,7 @@ var artOn____jsn = []
 var artOff___jsn = []
 var artRange_jsn = []
 var fadName__jsn = []
+var fadType__jsn = []
 var fadCode__jsn = []
 var fadDeflt_jsn = []
 
@@ -18,27 +19,36 @@ for (i in allTrack_jsn) {
 		var obj = trackArrays[key];
 		for (var prop in obj) {
 			if (!obj.hasOwnProperty(prop)) continue;
-			if (prop.includes("_Name")) {
+			if (prop.includes("artName__")) {
 				artName__jsn.push(obj[prop])
-			} else if (prop.includes("_Range")) {
-				artRange_jsn.push(obj[prop])
-			} else if (prop.includes("_Type")) {
+			}
+			if (prop.includes("artType__")) {
 				artType__jsn.push(obj[prop])
-			} else if (prop.includes("_Code")) {
+			}
+			if (prop.includes("artCode__")) {
 				artCode__jsn.push(obj[prop])
-			} else if (prop.includes("_Default")) {
+			}
+			if (prop.includes("artDeflt_")) {
 				artDeflt_jsn.push(obj[prop])
-			} else if (prop.includes("_On")) {
+			}
+			if (prop.includes("artOn____")) {
 				artOn____jsn.push(obj[prop])
-			} else if (prop.includes("_Off")) {
+			}
+			if (prop.includes("artOff___")) {
 				artOff___jsn.push(obj[prop])
-			} else if (prop.includes("FadA")) {
-				fadCode__jsn.push(obj[prop])
-			} else if (prop.includes("FadB")) {
-				fadDeflt_jsn.push(obj[prop])
-			} else if (prop.includes("FadC")) {
+			}
+			if (prop.includes("artRange_")) {
+				artRange_jsn.push(obj[prop])
+			}
+			if (prop.includes("fadName__")) {
 				fadName__jsn.push(obj[prop])
-			} else continue
+			}
+			if (prop.includes("fadCode__")) {
+				fadCode__jsn.push(obj[prop])
+			}
+			if (prop.includes("fadDeflt_")) {
+				fadDeflt_jsn.push(obj[prop])
+			}
 		}
 	}
 }
@@ -76,7 +86,7 @@ for (let i = 0; i < 8; i++) {
 	fadAddr__osc[i] = "/CC_fad__" + parseInt(i + 1)
 	fadCode__osc[i] = "/CC_incr_" + parseInt(i + 1)
 }
-//array of all notes (C3 = 60)
+//array of all notes (Middle C == C3 == MIDI Code 60)
 var allNotes_loc = []
 for (let i = -2; i < 9; i++) {
 	var cn = String('C' + i)
@@ -121,6 +131,7 @@ module.exports = {
 	},
 
 	oscInFilter: function(data) {
+
 		var { address, args, host, port } = data
 		var arg1 = args[1].value
 		var arg2 = args[2].value
@@ -140,6 +151,7 @@ module.exports = {
 		// 		myAddrs__loc[i] = false
 		// 	}
 		// }
+		///////////////////////////////////
 		var osc1 = false
 		var osc2 = false
 		var osc3 = false
@@ -169,7 +181,7 @@ module.exports = {
 		if (address === '/key_pressure') {
 			keyP = true
 		}
-
+		///////////////////////////////////
 		if (ctrl && osc2 && arg1 === 127) {
 			if (arg2 === 1) {
 				togUpdat_loc = true
@@ -199,19 +211,21 @@ module.exports = {
 
 		if (keyP) {
 
-			var selecTrk = arg1 * 128 + arg2
-			var fullRang = allTrack_jsn[selecTrk].Key_FullRanges
+			var trkNumb = arg1 * 128 + arg2
+			var trkRang = allTrack_jsn[trkNumb].INFO_XXX_trkRnge____
+			var trkName = allTrack_jsn[trkNumb].INFO_001_trkName____
+			var artRng3 = allTrack_jsn[trkNumb].INFO_057_artRange_03
 
-			receive("/selectedTrackName", allTrack_jsn[selecTrk].Track)
-			receive("/selectedTrackKeyRanges", fullRang)
+			receive("/selectedTrackName", trkName)
+			receive("/selectedTrackKeyRanges", trkRang)
 
-			if (allTrack_jsn[selecTrk].Art3_Range === "") {
-				receive('/keyRangeVar1', fullRang)
+			if (artRng3 === "") {
+				receive('/keyRangeVar1', trkRang)
 				receive('/keyRangeScript', 1)
 			}
 
 			for (let i = 0; i < 8; i++) {
-				var fadIndx = selecTrk * 8 + i
+				var fadIndx = trkNumb * 8 + i
 				let nameOsc = fadName__osc[i]
 				let addrOsc = fadAddr__osc[i]
 				let codeOsc = fadCode__osc[i]
@@ -235,7 +249,7 @@ module.exports = {
 				}
 			}
 			for (let i = 0; i < 18; i++) {
-				var artIndx = selecTrk * 18 + i
+				var artIndx = trkNumb * 18 + i
 				let nameOsc = artName__osc[i]
 				let typeOsc = artType__osc[i]
 				let codeOsc = artCode__osc[i]
