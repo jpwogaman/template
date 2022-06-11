@@ -1,98 +1,133 @@
-var tracks = loadJSON("../template/tracks.json")
-const allNotes = ["C-2", "C#-2", "D-2", "D#-2", "E-2", "F-2", "F#-2", "G-2", "G#-2", "A-2", "A#-2", "B-2", "C-1", "C#-1", "D-1", "D#-1", "E-1", "F-1", "F#-1", "G-1", "G#-1", "A-1", "A#-1", "B-1", "C0", "C#0", "D0", "D#0", "E0", "F0", "F#0", "G0", "G#0", "A0", "A#0", "B0", "C1", "C#1", "D1", "D#1", "E1", "F1", "F#1", "G1", "G#1", "A1", "A#1", "B1", "C2", "C#2", "D2", "D#2", "E2", "F2", "F#2", "G2", "G#2", "A2", "A#2", "B2", "C3", "C#3", "D3", "D#3", "E3", "F3", "F#3", "G3", "G#3", "A3", "A#3", "B3", "C4", "C#4", "D4", "D#4", "E4", "F4", "F#4", "G4", "G#4", "A4", "A#4", "B4", "C5", "C#5", "D5", "D#5", "E5", "F5", "F#5", "G5", "G#5", "A5", "A#5", "B5", "C6", "C#6", "D6", "D#6", "E6", "F6", "F#6", "G6", "G#6", "A6", "A#6", "B6", "C7", "C#7", "D7", "D#7", "E7", "F7", "F#7", "G7", "G#7", "A7", "A#7", "B7", "C8", "C#8", "D8", "D#8", "E8", "F8", "F#8", "G8", "G#8", "A8", "A#8", "B8", "C9", "C#9", "D9", "D#9", "E9", "F9", "F#9", "G9"]
-var artNamesVars = []
-var artRangsVars = []
-var artModsAVars = []
-var artModsBVars = []
-var artTypesVars = []
-var artCodesVars = []
-var artColrsVars = []
-var artDeftsVars = []
-var artOns__Vars = []
-var artOffs_Vars = []
-var artInptsVars = []
-var fadCodesVars = []
-var fadNamesVars = []
-var fadIDs__Vars = []
-var artNames____ = []
-var artRangs____ = []
-var artTypes____ = []
-var artCodes____ = []
-var artDefts____ = []
-var artOns______ = []
-var artOffs_____ = []
-var artInpts____ = []
-var fadCodes____ = []
-var fadDefts____ = []
-var fadNames____ = []
+//variable & input values to be sent to OSC
+var allTrack_jsn = loadJSON("../template/tracks.json")
+var artName__jsn = []
+var artType__jsn = []
+var artCode__jsn = []
+var artDeflt_jsn = []
+var artOn____jsn = []
+var artOff___jsn = []
+var artRange_jsn = []
+var fadName__jsn = []
+var fadType__jsn = []
+var fadCode__jsn = []
+var fadDeflt_jsn = []
 
-for (let i = 0; i < 18; i++) {
-	artNamesVars[i] = "/artname_" + parseInt(i + 1)
-	artRangsVars[i] = "/artrang_" + parseInt(i + 1)
-	artModsAVars[i] = "/artmodA_" + parseInt(i + 1)
-	artModsBVars[i] = "/artmodB_" + parseInt(i + 1)
-	artTypesVars[i] = "/arttype_" + parseInt(i + 1)
-	artCodesVars[i] = "/artcode_" + parseInt(i + 1)
-	artColrsVars[i] = "/artcolr_" + parseInt(i + 1)
-	artDeftsVars[i] = "/artdeft_" + parseInt(i + 1)
-	artOns__Vars[i] = "/arton___" + parseInt(i + 1)
-	artOffs_Vars[i] = "/artoff__" + parseInt(i + 1)
-	artInptsVars[i] = "/artinpt_" + parseInt(i + 1)
-}
-
-for (let i = 0; i < 8; i++) {
-	fadCodesVars[i] = "/CC_incr_" + parseInt(i + 1)
-	fadNamesVars[i] = "/CC_disp_" + parseInt(i + 1)
-	fadIDs__Vars[i] = "/CC_fad__" + parseInt(i + 1)
-}
-
-for (i in tracks) {
-	trackArrays = [tracks[i]]
+for (i in allTrack_jsn) {
+	trackArrays = [allTrack_jsn[i]]
 	for (var key in trackArrays) {
 		if (!trackArrays.hasOwnProperty(key)) continue;
 		var obj = trackArrays[key];
 		for (var prop in obj) {
 			if (!obj.hasOwnProperty(prop)) continue;
-			if (prop.includes("_Name")) {
-				artNames____.push(obj[prop])
-			} else if (prop.includes("_Range")) {
-				artRangs____.push(obj[prop])
-			} else if (prop.includes("_Type")) {
-				artTypes____.push(obj[prop])
-			} else if (prop.includes("_Code")) {
-				artCodes____.push(obj[prop])
-			} else if (prop.includes("_Default")) {
-				artDefts____.push(obj[prop])
-			} else if (prop.includes("_On")) {
-				artOns______.push(obj[prop])
-			} else if (prop.includes("_Off")) {
-				artOffs_____.push(obj[prop])
-			} else if (prop.includes("FadA")) {
-				fadCodes____.push(obj[prop])
-			} else if (prop.includes("FadB")) {
-				fadDefts____.push(obj[prop])
-			} else if (prop.includes("FadC")) {
-				fadNames____.push(obj[prop])
-			} else continue
+			if (prop.includes("artName__")) {
+				artName__jsn.push(obj[prop])
+			}
+			if (prop.includes("artType__")) {
+				artType__jsn.push(obj[prop])
+			}
+			if (prop.includes("artCode__")) {
+				artCode__jsn.push(obj[prop])
+			}
+			if (prop.includes("artDeflt_")) {
+				artDeflt_jsn.push(obj[prop])
+			}
+			if (prop.includes("artOn____")) {
+				artOn____jsn.push(obj[prop])
+			}
+			if (prop.includes("artOff___")) {
+				artOff___jsn.push(obj[prop])
+			}
+			if (prop.includes("artRange_")) {
+				artRange_jsn.push(obj[prop])
+			}
+			if (prop.includes("fadName__")) {
+				fadName__jsn.push(obj[prop])
+			}
+			if (prop.includes("fadCode__")) {
+				fadCode__jsn.push(obj[prop])
+			}
+			if (prop.includes("fadDeflt_")) {
+				fadDeflt_jsn.push(obj[prop])
+			}
 		}
 	}
 }
+//variable & input ID's/addresses in OSC
+var artName__osc = []
+var artType__osc = []
+var artCode__osc = []
+var artInput_osc = []
+var artDeflt_osc = []
+var artOn____osc = []
+var artOff___osc = []
+var artRange_osc = []
+var artColor_osc = []
+var artModeA_osc = []
+var artModeB_osc = []
+var fadName__osc = []
+var fadAddr__osc = []
+var fadCode__osc = []
 
-var autoUpdate = false
-var showCodes = true
+for (let i = 0; i < 18; i++) {
+	artName__osc[i] = "/artname_" + parseInt(i + 1)
+	artType__osc[i] = "/arttype_" + parseInt(i + 1)
+	artCode__osc[i] = "/artcode_" + parseInt(i + 1)
+	artInput_osc[i] = "/artinpt_" + parseInt(i + 1)
+	artDeflt_osc[i] = "/artdeft_" + parseInt(i + 1)
+	artOn____osc[i] = "/arton___" + parseInt(i + 1)
+	artOff___osc[i] = "/artoff__" + parseInt(i + 1)
+	artRange_osc[i] = "/artrang_" + parseInt(i + 1)
+	artColor_osc[i] = "/artcolr_" + parseInt(i + 1)
+	artModeA_osc[i] = "/artmodA_" + parseInt(i + 1)
+	artModeB_osc[i] = "/artmodB_" + parseInt(i + 1)
+}
+for (let i = 0; i < 8; i++) {
+	fadName__osc[i] = "/CC_disp_" + parseInt(i + 1)
+	fadAddr__osc[i] = "/CC_fad__" + parseInt(i + 1)
+	fadCode__osc[i] = "/CC_incr_" + parseInt(i + 1)
+}
+//array of all notes (Middle C == C3 == MIDI Code 60)
+var allNotes_loc = []
+for (let i = -2; i < 9; i++) {
+	var cn = String('C' + i)
+	var cs = String('C#' + i)
+	var dn = String('D' + i)
+	var ds = String('D#' + i)
+	var en = String('E' + i)
+	var fn = String('F' + i)
+	var fs = String('F#' + i)
+	var gn = String('G' + i)
+	var gs = String('G#' + i)
+	var an = String('A' + i)
+	var as = String('A#' + i)
+	var bn = String('B' + i)
+	allNotes_loc.push(cn, cs, dn, ds, en, fn, fs, gn, gs, an, as, bn)
+}
+//toggle counters
+var togUpdat_loc = false
+var togCodes_loc = true
+// var osc1 = false
+// var osc2 = false
+// var osc3 = false
+// var osc4 = false
+// var ctrl = false
+// var note = false
+// var ptch = false
+// var keyP = false
+// var myPorts__vrt = ["OSC1", "OSC2", "OSC3", "OSC4"]
+// var myAddrs__vrt = ['/control', '/note', '/pitch', '/key_pressure']
+// var myPorts__loc = [osc1, osc2, osc3, osc4]
+// var myAddrs__loc = [ctrl, note, ptch, keyP]
 
 module.exports = {
 
 	init: function() {
-
 		send("midi", "OSC1", "/control", 3, 17, 1) //'whole notes'
 		send("midi", "OSC1", "/control", 3, 25, 1) //'grid'
-		send("midi", "OSC1", "/control", 2, 9, 1) //'A5X + SUB8'
-
+		send("midi", "OSC1", "/control", 2, 09, 1) //'A5X + SUB8'
 		setTimeout(() => {
 			send("midi", "OSC1", "/control", 3, 20, 1) //grid eighth notes
 		}, 100)
-
 	},
 
 	oscInFilter: function(data) {
@@ -100,14 +135,31 @@ module.exports = {
 		var { address, args, host, port } = data
 		var arg1 = args[1].value
 		var arg2 = args[2].value
+
+		// for (i in myPorts__loc) {
+		// 	if (port === myPorts__vrt[i]) {
+		// 		myPorts__loc[i] = true
+		// 	} else {
+		// 		myPorts__loc[i] = false
+		// 	}
+		// }
+		// for (i in myAddrs__loc) {
+		// 	if (address === myAddrs__vrt[i]) {
+		// 		myAddrs__loc[i] = true
+		// 		console.log()
+		// 	} else {
+		// 		myAddrs__loc[i] = false
+		// 	}
+		// }
+		///////////////////////////////////
 		var osc1 = false
 		var osc2 = false
 		var osc3 = false
 		var osc4 = false
-		var control = false
+		var ctrl = false
 		var note = false
-		var keyPressure = false
-
+		var ptch = false
+		var keyP = false
 		if (port === 'OSC1') {
 			osc1 = true
 		}
@@ -121,144 +173,147 @@ module.exports = {
 			osc4 = true
 		}
 		if (address === '/control') {
-			control = true
+			ctrl = true
 		}
 		if (address === '/note') {
 			note = true
 		}
 		if (address === '/key_pressure') {
-			keyPressure = true
+			keyP = true
 		}
-
-		if (control && osc2 && arg1 === 127) {
+		///////////////////////////////////
+		if (ctrl && osc2 && arg1 === 127) {
 			if (arg2 === 1) {
-				autoUpdate = true
+				togUpdat_loc = true
 			} else {
-				autoUpdate = false
+				togUpdat_loc = false
 			}
 		}
 
-		if (control && osc2 && arg1 === 119) {
+		if (ctrl && osc2 && arg1 === 119) {
 			send("midi", "OSC4", "/control", 1, 127, 127)
 			if (arg2 === 1) {
-				showCodes = true
+				togCodes_loc = true
 			} else {
-				showCodes = false
+				togCodes_loc = false
 			}
 		}
 
-		if (autoUpdate) {
+		if (togUpdat_loc) {
 			receive('/trackNameColor', '#70b7ff')
 		} else {
 			receive('/trackNameColor', 'red')
 		}
 
-		if (autoUpdate && control && arg1 === 126 && arg2 !== 0) {
+		if (togUpdat_loc && ctrl && arg1 === 126 && arg2 !== 0) {
 			send("midi", "OSC4", "/control", 1, 127, 127)
 		}
 
-		if (keyPressure) {
-			var x = arg1 * 128 + arg2
-			var fullRange = tracks[x].Key_FullRanges
+		if (keyP) {
 
-			receive("/selectedTrackName", tracks[x].Track)
-			receive("/selectedTrackKeyRanges", fullRange)
+			var trkNumb = arg1 * 128 + arg2
+			var trkRang = allTrack_jsn[trkNumb].INFO_XXX_trkRnge____
+			var trkName = allTrack_jsn[trkNumb].INFO_001_trkName____
+			var artRng3 = allTrack_jsn[trkNumb].INFO_057_artRange_03
 
-			if (tracks[x].Art3_rang___ === "") {
-				receive('/keyRangeVar1', fullRange)
+			receive("/selectedTrackName", trkName)
+			receive("/selectedTrackKeyRanges", trkRang)
+
+			if (artRng3 === "") {
+				receive('/keyRangeVar1', trkRang)
 				receive('/keyRangeScript', 1)
 			}
 
 			for (let i = 0; i < 8; i++) {
-				var y = x * 8 + i
-				let id__Var = fadIDs__Vars[i]
-				let nameVar = fadNamesVars[i]
-				let codeVar = fadCodesVars[i]
-				let name___ = fadNames____[y]
-				let code___ = parseInt(fadCodes____[y])
-				let deft___ = parseInt(fadDefts____[y])
-				let fadPge2 = fadCodes____[4]
+				var fadIndx = trkNumb * 8 + i
+				let nameOsc = fadName__osc[i]
+				let addrOsc = fadAddr__osc[i]
+				let codeOsc = fadCode__osc[i]
+				let nameJsn = fadName__jsn[fadIndx]
+				let codeJsn = parseInt(fadCode__jsn[fadIndx])
+				let deftJsn = parseInt(fadDeflt_jsn[fadIndx])
+				let fadPage = fadCode__jsn[4]
 
-				receive(codeVar, code___)
-				receive(nameVar, name___)
-				receive(id__Var, deft___)
+				receive(nameOsc, nameJsn)
+				receive(addrOsc, deftJsn)
+				receive(codeOsc, codeJsn)
 
-				if (code___ !== null) {
-					send("midi", "OSC4", "/control", 1, code___, deft___)
+				if (codeJsn !== null) {
+					send("midi", "OSC4", "/control", 1, codeJsn, deftJsn)
 				} else continue
 
-				if (fadPge2 !== null) {
+				if (fadPage !== null) {
 					receive('/faderPanel-color-2', "1px solid red")
 				} else {
 					receive('/faderPanel-color-2', "")
 				}
 			}
 			for (let i = 0; i < 18; i++) {
-				var y = x * 18 + i
-				let zz
-				let typeVar = artTypesVars[i]
-				let codeVar = artCodesVars[i]
-				let nameVar = artNamesVars[i]
-				let rangVar = artRangsVars[i]
-				let deftVar = artDeftsVars[i]
-				let on__Var = artOns__Vars[i]
-				let off_Var = artOffs_Vars[i]
-				let modAVar = artModsAVars[i]
-				let modBVar = artModsBVars[i]
-				let inptVar = artInptsVars[i]
-				let colrVar = artColrsVars[i]
-				let name___ = artNames____[y]
-				let type___ = artTypes____[y]
-				let rang___ = String(artRangs____[y])
-				let code___ = parseInt(artCodes____[y])
-				let on_____ = parseInt(artOns______[y])
-				let off____ = parseInt(artOffs_____[y])
-				let deft___ = parseInt(artDefts____[y])
+				var artIndx = trkNumb * 18 + i
+				let nameOsc = artName__osc[i]
+				let typeOsc = artType__osc[i]
+				let codeOsc = artCode__osc[i]
+				let inptOsc = artInput_osc[i]
+				let deftOsc = artDeflt_osc[i]
+				let on__Osc = artOn____osc[i]
+				let off_Osc = artOff___osc[i]
+				let rangOsc = artRange_osc[i]
+				let colrOsc = artColor_osc[i]
+				let modAOsc = artModeA_osc[i]
+				let modBOsc = artModeB_osc[i]
+				let nameJsn = artName__jsn[artIndx]
+				let typeJsn = artType__jsn[artIndx]
+				let codeJsn = parseInt(artCode__jsn[artIndx])
+				let deftJsn = parseInt(artDeflt_jsn[artIndx])
+				let on__Jsn = parseInt(artOn____jsn[artIndx])
+				let off_Jsn = parseInt(artOff___jsn[artIndx])
+				let rangJsn = String(artRange_jsn[artIndx])
+				let codeDsp
 
-				if (type___ === "/control") {
-					zz = 'CC'
-				} else if (type___ === "/note") {
-					zz = allNotes[code___] + '/'
+				if (typeJsn === "/control") {
+					codeDsp = 'CC'
+				} else if (typeJsn === "/note") {
+					codeDsp = allNotes_loc[codeJsn] + '/'
 				} else {
-					zz = ''
+					codeDsp = ''
 				}
 
-				if (showCodes && name___ != "") {
-					receive(nameVar, name___ + ' (' + zz + code___ + '/' + on_____ + ')')
+				if (togCodes_loc && nameJsn !== "") {
+					receive(nameOsc, nameJsn + ' (' + codeDsp + codeJsn + '/' + on__Jsn + ')')
 				} else {
-					receive(nameVar, name___)
+					receive(nameOsc, nameJsn)
 				}
 
-				if (rang___ === "") {
-					receive(rangVar, " ")
+				if (rangJsn === "") {
+					receive(rangOsc, " ")
 				} else {
-					receive(rangVar, rang___)
+					receive(rangOsc, rangJsn)
 				}
 
-				receive(typeVar, type___)
-				receive(codeVar, code___)
-				receive(deftVar, deft___)
-				receive(on__Var, on_____)
-				receive(off_Var, off____)
-				receive(modAVar, 0.15)
-				receive(modBVar, 0.15)
+				receive(typeOsc, typeJsn)
+				receive(codeOsc, codeJsn)
+				receive(deftOsc, deftJsn)
+				receive(on__Osc, on__Jsn)
+				receive(off_Osc, off_Jsn)
+				receive(modAOsc, 0.15)
+				receive(modBOsc, 0.15)
 
-				if (name___ === "") {
-					receive(nameVar, " ")
-					receive(inptVar, "true")
-					receive(colrVar, "#A9A9A9")
+				if (nameJsn === "") {
+					receive(nameOsc, " ")
+					receive(inptOsc, "true")
+					receive(colrOsc, "#A9A9A9")
 				} else {
-					receive(inptVar, "false")
+					receive(inptOsc, "false")
 					if (i <= 1) {
-						receive(colrVar, "#a86739")
-						send("midi", "OSC3", type___, 1, code___, deft___)
+						receive(colrOsc, "#a86739")
+						send("midi", "OSC3", typeJsn, 1, codeJsn, deftJsn)
 					} else {
-						receive(colrVar, "#6dfdbb")
-						receive(deftVar, deft___)
-						if (deft___ !== 0) {
-							receive(modAVar, 0.75)
-							send("midi", "OSC4", type___, 1, code___, deft___)
-							receive('/keyRangeVar1', rang___)
+						receive(colrOsc, "#6dfdbb")
+						receive(deftOsc, deftJsn)
+						if (deftJsn !== 0) {
+							receive(modAOsc, 0.75)
+							send("midi", "OSC4", typeJsn, 1, codeJsn, deftJsn)
+							receive('/keyRangeVar1', rangJsn)
 							receive('/keyRangeScript', 1)
 						}
 					}
