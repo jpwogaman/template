@@ -13,7 +13,7 @@ var fadCode__jsn = []
 var fadDeflt_jsn = []
 
 for (i in allTrack_jsn) {
-	trackArrays = [allTrack_jsn[i]]
+	var trackArrays = [allTrack_jsn[i]]
 	for (var key in trackArrays) {
 		if (!trackArrays.hasOwnProperty(key)) continue;
 		var obj = trackArrays[key];
