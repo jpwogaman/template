@@ -9,5 +9,11 @@ Open Stage Control, Vienna Ensemble Pro, Cubase
 
 - GR1-OSC1-CH2.xml, etc. are "Generic Remotes" that are used in Cubase. They correlate with certain buttons and widgets in Open Stage Control and among other things, essentially allow for key commands to be accessed with MIDI commands.
 
+<<<<<<< HEAD
 
 ![alt text](./Images/template.png)
+=======
+![alt text]()
+
+![alt text](https://github.com/[jpwogaman]/[template]/blob/[main]/Images/template.png?raw=true)
+>>>>>>> 22e9cd581482baa5ac2e08834be43c65a1680dfb
