@@ -1,5 +1,5 @@
 //variable & input values to be sent to OSC
-const allTrack_jsn = loadJSON("../template/tracks.json")
+const allTrack_jsn = loadJSON('../template/tracks.json')
 const artName__jsn = []
 const artType__jsn = []
 const artCode__jsn = []
@@ -19,37 +19,37 @@ for (i in allTrack_jsn) {
 		var obj = trackArrays[key];
 		for (var prop in obj) {
 			if (!obj.hasOwnProperty(prop)) continue;
-			if (prop.includes("artName__")) {
+			if (prop.includes('artName__')) {
 				artName__jsn.push(obj[prop])
 			}
-			if (prop.includes("artType__")) {
+			if (prop.includes('artType__')) {
 				artType__jsn.push(obj[prop])
 			}
-			if (prop.includes("artCode__")) {
+			if (prop.includes('artCode__')) {
 				artCode__jsn.push(obj[prop])
 			}
-			if (prop.includes("artDeflt_")) {
+			if (prop.includes('artDeflt_')) {
 				artDeflt_jsn.push(obj[prop])
 			}
-			if (prop.includes("artOn____")) {
+			if (prop.includes('artOn____')) {
 				artOn____jsn.push(obj[prop])
 			}
-			if (prop.includes("artOff___")) {
+			if (prop.includes('artOff___')) {
 				artOff___jsn.push(obj[prop])
 			}
-			if (prop.includes("artRange_")) {
+			if (prop.includes('artRange_')) {
 				artRange_jsn.push(obj[prop])
 			}
-			if (prop.includes("fadName__")) {
+			if (prop.includes('fadName__')) {
 				fadName__jsn.push(obj[prop])
 			}
-			if (prop.includes("fadType__")) {
+			if (prop.includes('fadType__')) {
 				fadType__jsn.push(obj[prop])
 			}
-			if (prop.includes("fadCode__")) {
+			if (prop.includes('fadCode__')) {
 				fadCode__jsn.push(obj[prop])
 			}
-			if (prop.includes("fadDeflt_")) {
+			if (prop.includes('fadDeflt_')) {
 				fadDeflt_jsn.push(obj[prop])
 			}
 		}
@@ -72,22 +72,22 @@ const fadAddr__osc = []
 const fadCode__osc = []
 
 for (let i = 0; i < 18; i++) {
-	artName__osc[i] = "/artname_" + parseInt(i + 1)
-	artType__osc[i] = "/arttype_" + parseInt(i + 1)
-	artCode__osc[i] = "/artcode_" + parseInt(i + 1)
-	artInput_osc[i] = "/artinpt_" + parseInt(i + 1)
-	artDeflt_osc[i] = "/artdeft_" + parseInt(i + 1)
-	artOn____osc[i] = "/arton___" + parseInt(i + 1)
-	artOff___osc[i] = "/artoff__" + parseInt(i + 1)
-	artRange_osc[i] = "/artrang_" + parseInt(i + 1)
-	artColor_osc[i] = "/artcolr_" + parseInt(i + 1)
-	artModeA_osc[i] = "/artmodA_" + parseInt(i + 1)
-	artModeB_osc[i] = "/artmodB_" + parseInt(i + 1)
+	artName__osc[i] = '/artname_' + parseInt(i + 1)
+	artType__osc[i] = '/arttype_' + parseInt(i + 1)
+	artCode__osc[i] = '/artcode_' + parseInt(i + 1)
+	artInput_osc[i] = '/artinpt_' + parseInt(i + 1)
+	artDeflt_osc[i] = '/artdeft_' + parseInt(i + 1)
+	artOn____osc[i] = '/arton___' + parseInt(i + 1)
+	artOff___osc[i] = '/artoff__' + parseInt(i + 1)
+	artRange_osc[i] = '/artrang_' + parseInt(i + 1)
+	artColor_osc[i] = '/artcolr_' + parseInt(i + 1)
+	artModeA_osc[i] = '/artmodA_' + parseInt(i + 1)
+	artModeB_osc[i] = '/artmodB_' + parseInt(i + 1)
 }
 for (let i = 0; i < 8; i++) {
-	fadName__osc[i] = "/CC_disp_" + parseInt(i + 1)
-	fadAddr__osc[i] = "/CC_fad__" + parseInt(i + 1)
-	fadCode__osc[i] = "/CC_incr_" + parseInt(i + 1)
+	fadName__osc[i] = '/CC_disp_' + parseInt(i + 1)
+	fadAddr__osc[i] = '/CC_fad__' + parseInt(i + 1)
+	fadCode__osc[i] = '/CC_incr_' + parseInt(i + 1)
 }
 //array of all notes (Middle C == C3 == MIDI Code 60)
 var allNotes_loc = []
@@ -108,15 +108,15 @@ for (let i = -2; i < 9; i++) {
 }
 //update current MIDI track
 function trkUpdate() {
-	send("midi", "OSC4", "/control", 1, 127, 127)
+	send('midi', 'OSC4', '/control', 1, 127, 127)
 }
 //send default articulation parameters to Cubase
 function prmUpdate(x, typeJsn, codeJsn, deftJsn) {
 	if (x === 3) {
-		send("midi", "OSC3", typeJsn, 1, codeJsn, deftJsn)
+		send('midi', 'OSC3', typeJsn, 1, codeJsn, deftJsn)
 	}
 	if (x === 4) {
-		send("midi", "OSC4", typeJsn, 1, codeJsn, deftJsn)
+		send('midi', 'OSC4', typeJsn, 1, codeJsn, deftJsn)
 	}
 }
 //toggle counters
@@ -188,15 +188,15 @@ function keyRanges(x) {
 	receive('/keyRangeVar1', x)
 	receive('/keyRangeScript', 1)
 }
-// the formal "custom module" for Open Stage Control
+// the formal 'custom module' for Open Stage Control
 module.exports = {
 
 	init: function() {
-		send("midi", "OSC1", "/control", 3, 17, 1) //'whole notes'
-		send("midi", "OSC1", "/control", 3, 25, 1) //'grid'
-		send("midi", "OSC1", "/control", 2, 09, 1) //'A5X + SUB8'
+		send('midi', 'OSC1', '/control', 3, 17, 1) //'whole notes'
+		send('midi', 'OSC1', '/control', 3, 25, 1) //'grid'
+		send('midi', 'OSC1', '/control', 2, 09, 1) //'A5X + SUB8'
 		setTimeout(() => {
-			send("midi", "OSC1", "/control", 3, 20, 1) //grid eighth notes
+			send('midi', 'OSC1', '/control', 3, 20, 1) //grid eighth notes
 		}, 100)
 	},
 
@@ -245,10 +245,10 @@ module.exports = {
 			const trkName = allTrack_jsn[trkNumb].INFO_001_trkName____
 			const artRng3 = allTrack_jsn[trkNumb].INFO_057_artRange_03
 
-			receive("/selectedTrackName", trkName)
-			receive("/selectedTrackKeyRanges", trkRang)
+			receive('/selectedTrackName', trkName)
+			receive('/selectedTrackKeyRanges', trkRang)
 
-			if (artRng3 === "") {
+			if (artRng3 === '') {
 				keyRanges(trkRang)
 			}
 
@@ -272,9 +272,9 @@ module.exports = {
 				} else continue
 
 				if (fadPage !== null) {
-					receive('/faderPanel-color-2', "1px solid red")
+					receive('/faderPanel-color-2', '1px solid red')
 				} else {
-					receive('/faderPanel-color-2', "")
+					receive('/faderPanel-color-2', '')
 				}
 			}
 			for (let i = 0; i < 18; i++) {
@@ -299,22 +299,22 @@ module.exports = {
 				const rangJsn = String(artRange_jsn[artIndx])
 				let codeDsp
 
-				if (typeJsn === "/control") {
+				if (typeJsn === '/control') {
 					codeDsp = 'CC'
-				} else if (typeJsn === "/note") {
+				} else if (typeJsn === '/note') {
 					codeDsp = allNotes_loc[codeJsn] + '/'
 				} else {
 					codeDsp = ''
 				}
 
-				if (togCodes_loc && nameJsn !== "") {
+				if (togCodes_loc && nameJsn !== '') {
 					receive(nameOsc, nameJsn + ' (' + codeDsp + codeJsn + '/' + on__Jsn + ')')
 				} else {
 					receive(nameOsc, nameJsn)
 				}
 
-				if (rangJsn === "") {
-					receive(rangOsc, " ")
+				if (rangJsn === '') {
+					receive(rangOsc, ' ')
 				} else {
 					receive(rangOsc, rangJsn)
 				}
@@ -327,17 +327,17 @@ module.exports = {
 				receive(modAOsc, 0.15)
 				receive(modBOsc, 0.15)
 
-				if (nameJsn === "") {
-					receive(nameOsc, " ")
-					receive(inptOsc, "true")
-					receive(colrOsc, "#A9A9A9")
+				if (nameJsn === '') {
+					receive(nameOsc, ' ')
+					receive(inptOsc, 'true')
+					receive(colrOsc, '#A9A9A9')
 				} else {
-					receive(inptOsc, "false")
+					receive(inptOsc, 'false')
 					if (i <= 1) {
-						receive(colrOsc, "#a86739")
+						receive(colrOsc, '#a86739')
 						prmUpdate(3, typeJsn, codeJsn, deftJsn)
 					} else {
-						receive(colrOsc, "#6dfdbb")
+						receive(colrOsc, '#6dfdbb')
 						receive(deftOsc, deftJsn)
 						if (deftJsn !== 0) {
 							receive(modAOsc, 0.75)
