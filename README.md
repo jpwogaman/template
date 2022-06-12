@@ -21,8 +21,10 @@
 ## the OSC client with my work file loaded
 ![the OSC client with my work file loaded](./Images/template.png)
 
-## Generic Remote loaded into Cubase
-![Generic Remote loaded into Cubase](./Images/GR1-OSC1-CH2.png)
+## Editing a Generic Remote in Cubase
+![Editing a Generic Remote in Cubase](./Images/GR1-OSC1-CH2.png)
 
 ## Custom Module in action
 ![Custom Module in action](./Images/custom-module-in-action.mp4)
+
+https://user-images.githubusercontent.com/79177647/173257005-e2d7d26d-4b6d-4523-a751-b750b804bdd6.mp4
