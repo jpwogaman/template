@@ -1,16 +1,16 @@
 //variable & input values to be sent to OSC
-var allTrack_jsn = loadJSON("../template/tracks.json")
-var artName__jsn = []
-var artType__jsn = []
-var artCode__jsn = []
-var artDeflt_jsn = []
-var artOn____jsn = []
-var artOff___jsn = []
-var artRange_jsn = []
-var fadName__jsn = []
-var fadType__jsn = []
-var fadCode__jsn = []
-var fadDeflt_jsn = []
+const allTrack_jsn = loadJSON("../template/tracks.json")
+const artName__jsn = []
+const artType__jsn = []
+const artCode__jsn = []
+const artDeflt_jsn = []
+const artOn____jsn = []
+const artOff___jsn = []
+const artRange_jsn = []
+const fadName__jsn = []
+const fadType__jsn = []
+const fadCode__jsn = []
+const fadDeflt_jsn = []
 
 for (i in allTrack_jsn) {
 	var trackArrays = [allTrack_jsn[i]]
@@ -298,28 +298,32 @@ module.exports = {
 				receive(modAOsc, 0.15)
 				receive(modBOsc, 0.15)
 
-				if (nameJsn === "") {
-					receive(nameOsc, " ")
-					receive(inptOsc, "true")
-					receive(colrOsc, "#A9A9A9")
-				} else {
-					receive(inptOsc, "false")
-					if (i <= 1) {
-						receive(colrOsc, "#a86739")
-						send("midi", "OSC3", typeJsn, 1, codeJsn, deftJsn)
-					} else {
-						receive(colrOsc, "#6dfdbb")
-						receive(deftOsc, deftJsn)
-						if (deftJsn !== 0) {
-							receive(modAOsc, 0.75)
-							send("midi", "OSC4", typeJsn, 1, codeJsn, deftJsn)
-							receive('/keyRangeVar1', rangJsn)
-							receive('/keyRangeScript', 1)
-						}
-					}
-				}
+				fooBar(nameJsn, nameOsc, inptOsc, colrOsc, i, typeJsn, codeJsn, deftJsn, deftOsc, modAOsc, rangJsn)
 			}
 		}
 		return { address, args, host, port }
 	}
 };
+
+function fooBar(nameJsn, nameOsc, inptOsc, colrOsc, i, typeJsn, codeJsn, deftJsn, deftOsc, modAOsc, rangJsn) {
+	if (nameJsn === "") {
+		receive(nameOsc, " ")
+		receive(inptOsc, "true")
+		receive(colrOsc, "#A9A9A9")
+	} else {
+		receive(inptOsc, "false")
+		if (i <= 1) {
+			receive(colrOsc, "#a86739")
+			send("midi", "OSC3", typeJsn, 1, codeJsn, deftJsn)
+		} else {
+			receive(colrOsc, "#6dfdbb")
+			receive(deftOsc, deftJsn)
+			if (deftJsn !== 0) {
+				receive(modAOsc, 0.75)
+				send("midi", "OSC4", typeJsn, 1, codeJsn, deftJsn)
+				receive('/keyRangeVar1', rangJsn)
+				receive('/keyRangeScript', 1)
+			}
+		}
+	}
+}
