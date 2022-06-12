@@ -12,3 +12,6 @@ Open Stage Control, Vienna Ensemble Pro, Cubase
 # Open Stage control
 ![the OSC launcher](./Images/osc-launcher.png)
 ![the OSC client with my work file loaded](./Images/template.png)
+
+# Cubase
+![Generic Remote loaded into Cubase](./Images/GR1-OSC1-CH2.png)

@@ -24,7 +24,7 @@
 <ctrl><name>Toggle MIDI Tracks Timebase</name><stat>176</stat><chan>1</chan><addr>21</addr><max>127</max><flags>1</flags></ctrl>
 <ctrl><name>Process Tempo</name><stat>176</stat><chan>1</chan><addr>22</addr><max>127</max><flags>1</flags></ctrl>
 </ctrltable>
-<bank name="OSC1 - File Level">
+<bank name="GR1-OSC1-CH2">
 <entry ctrl="Studio Setup">
 <command><category>Devices</category><action>Setup</action><flags>1</flags></command>
 </entry>
