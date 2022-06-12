@@ -15,4 +15,4 @@ Open Stage Control, Vienna Ensemble Pro, Cubase
 
 # Cubase
 ![Generic Remote loaded into Cubase](./Images/GR1-OSC1-CH2.png)
-![Generic Remote in action](./Images/custom-module-in-action.gif)
+![Generic Remote in action](./Images/custom-module-in-action.mov)
