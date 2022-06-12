@@ -1,7 +1,7 @@
 # Template
 ## What you need to know:
 
-- **Open Stage Control (OSC)** is a "Libre and modular OSC / MIDI controller" used on a touch screens in music production environments. ([view repo](https://github.com/jean-emmanuel/open-stage-control.git))
+- **Open Stage Control (OSC)** is a "Libre and modular OSC / MIDI controller" used on touch screens in music production environments. ([view repo](https://github.com/jean-emmanuel/open-stage-control.git))
 
 - **Vienna Ensemble Pro (VEP)** hosts Virtual Instruments, Samplers, VSTs, etc.
 
