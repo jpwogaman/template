@@ -1,16 +1,16 @@
 //variable & input values to be sent to OSC
-var allTrack_jsn = loadJSON("../template/tracks.json")
-var artName__jsn = []
-var artType__jsn = []
-var artCode__jsn = []
-var artDeflt_jsn = []
-var artOn____jsn = []
-var artOff___jsn = []
-var artRange_jsn = []
-var fadName__jsn = []
-var fadType__jsn = []
-var fadCode__jsn = []
-var fadDeflt_jsn = []
+const allTrack_jsn = loadJSON("../template/tracks.json")
+const artName__jsn = []
+const artType__jsn = []
+const artCode__jsn = []
+const artDeflt_jsn = []
+const artOn____jsn = []
+const artOff___jsn = []
+const artRange_jsn = []
+const fadName__jsn = []
+const fadType__jsn = []
+const fadCode__jsn = []
+const fadDeflt_jsn = []
 
 for (i in allTrack_jsn) {
 	var trackArrays = [allTrack_jsn[i]]
@@ -53,20 +53,20 @@ for (i in allTrack_jsn) {
 	}
 }
 //variable & input ID's/addresses in OSC
-var artName__osc = []
-var artType__osc = []
-var artCode__osc = []
-var artInput_osc = []
-var artDeflt_osc = []
-var artOn____osc = []
-var artOff___osc = []
-var artRange_osc = []
-var artColor_osc = []
-var artModeA_osc = []
-var artModeB_osc = []
-var fadName__osc = []
-var fadAddr__osc = []
-var fadCode__osc = []
+const artName__osc = []
+const artType__osc = []
+const artCode__osc = []
+const artInput_osc = []
+const artDeflt_osc = []
+const artOn____osc = []
+const artOff___osc = []
+const artRange_osc = []
+const artColor_osc = []
+const artModeA_osc = []
+const artModeB_osc = []
+const fadName__osc = []
+const fadAddr__osc = []
+const fadCode__osc = []
 
 for (let i = 0; i < 18; i++) {
 	artName__osc[i] = "/artname_" + parseInt(i + 1)
@@ -89,35 +89,36 @@ for (let i = 0; i < 8; i++) {
 //array of all notes (Middle C == C3 == MIDI Code 60)
 var allNotes_loc = []
 for (let i = -2; i < 9; i++) {
-	var cn = String('C' + i)
-	var cs = String('C#' + i)
-	var dn = String('D' + i)
-	var ds = String('D#' + i)
-	var en = String('E' + i)
-	var fn = String('F' + i)
-	var fs = String('F#' + i)
-	var gn = String('G' + i)
-	var gs = String('G#' + i)
-	var an = String('A' + i)
-	var as = String('A#' + i)
-	var bn = String('B' + i)
+	let cn = String('C' + i)
+	let cs = String('C#' + i)
+	let dn = String('D' + i)
+	let ds = String('D#' + i)
+	let en = String('E' + i)
+	let fn = String('F' + i)
+	let fs = String('F#' + i)
+	let gn = String('G' + i)
+	let gs = String('G#' + i)
+	let an = String('A' + i)
+	let as = String('A#' + i)
+	let bn = String('B' + i)
 	allNotes_loc.push(cn, cs, dn, ds, en, fn, fs, gn, gs, an, as, bn)
 }
 //toggle counters
-var togUpdat_loc = false
-var togCodes_loc = true
-// var osc1 = false
-// var osc2 = false
-// var osc3 = false
-// var osc4 = false
-// var ctrl = false
-// var note = false
-// var ptch = false
-// var keyP = false
-// var myPorts__vrt = ["OSC1", "OSC2", "OSC3", "OSC4"]
-// var myAddrs__vrt = ['/control', '/note', '/pitch', '/key_pressure']
-// var myPorts__loc = [osc1, osc2, osc3, osc4]
-// var myAddrs__loc = [ctrl, note, ptch, keyP]
+let togUpdat_loc = false
+let togCodes_loc = true
+let osc1 = false
+let osc2 = false
+let osc3 = false
+let osc4 = false
+let ctrl = false
+let note = false
+let ptch = false
+let keyP = false
+const myPorts__vrt = ["OSC1", "OSC2", "OSC3", "OSC4"]
+const myAddrs__vrt = ['/control', '/note', '/pitch', '/key_pressure']
+const myPorts__loc = [osc1, osc2, osc3, osc4]
+const myAddrs__loc = [ctrl, note, ptch, keyP]
+// const [osc1, osc2, osc3, osc4] = myPorts__loc;
 
 module.exports = {
 
@@ -133,54 +134,57 @@ module.exports = {
 	oscInFilter: function(data) {
 
 		var { address, args, host, port } = data
-		var arg1 = args[1].value
-		var arg2 = args[2].value
+		const arg1 = args[1].value
+		const arg2 = args[2].value
 
-		// for (i in myPorts__loc) {
-		// 	if (port === myPorts__vrt[i]) {
-		// 		myPorts__loc[i] = true
-		// 	} else {
-		// 		myPorts__loc[i] = false
-		// 	}
-		// }
-		// for (i in myAddrs__loc) {
-		// 	if (address === myAddrs__vrt[i]) {
-		// 		myAddrs__loc[i] = true
-		// 		console.log()
-		// 	} else {
-		// 		myAddrs__loc[i] = false
-		// 	}
-		// }
+		for (let i = 0; i < myPorts__loc.length; i++) {
+			if (port === myPorts__vrt[i]) {
+				myPorts__loc[i] = true
+			} else {
+				myPorts__loc[i] = false
+			}
+		}
+
+		// for (i in arr) props of object
+		// for (i of arr) value of index
+
+		for (let i = 0; i < myAddrs__loc.length; i++) {
+			if (address === myAddrs__vrt[i]) {
+				myAddrs__loc[i] = true
+			} else {
+				myAddrs__loc[i] = false
+			}
+		}
 		///////////////////////////////////
-		var osc1 = false
-		var osc2 = false
-		var osc3 = false
-		var osc4 = false
-		var ctrl = false
-		var note = false
-		var ptch = false
-		var keyP = false
-		if (port === 'OSC1') {
-			osc1 = true
-		}
-		if (port === 'OSC2') {
-			osc2 = true
-		}
-		if (port === 'OSC3') {
-			osc3 = true
-		}
-		if (port === 'OSC4') {
-			osc4 = true
-		}
-		if (address === '/control') {
-			ctrl = true
-		}
-		if (address === '/note') {
-			note = true
-		}
-		if (address === '/key_pressure') {
-			keyP = true
-		}
+		// var osc1 = false
+		// var osc2 = false
+		// var osc3 = false
+		// var osc4 = false
+		// var ctrl = false
+		// var note = false
+		// var ptch = false
+		// var keyP = false
+		// if (port === 'OSC1') {
+		// 	osc1 = true
+		// }
+		// if (port === 'OSC2') {
+		// 	osc2 = true
+		// }
+		// if (port === 'OSC3') {
+		// 	osc3 = true
+		// }
+		// if (port === 'OSC4') {
+		// 	osc4 = true
+		// }
+		// if (address === '/control') {
+		// 	ctrl = true
+		// }
+		// if (address === '/note') {
+		// 	note = true
+		// }
+		// if (address === '/key_pressure') {
+		// 	keyP = true
+		// }
 		///////////////////////////////////
 		if (ctrl && osc2 && arg1 === 127) {
 			if (arg2 === 1) {
@@ -211,10 +215,10 @@ module.exports = {
 
 		if (keyP) {
 
-			var trkNumb = arg1 * 128 + arg2
-			var trkRang = allTrack_jsn[trkNumb].INFO_XXX_trkRnge____
-			var trkName = allTrack_jsn[trkNumb].INFO_001_trkName____
-			var artRng3 = allTrack_jsn[trkNumb].INFO_057_artRange_03
+			const trkNumb = arg1 * 128 + arg2
+			const trkRang = allTrack_jsn[trkNumb].INFO_XXX_trkRnge____
+			const trkName = allTrack_jsn[trkNumb].INFO_001_trkName____
+			const artRng3 = allTrack_jsn[trkNumb].INFO_057_artRange_03
 
 			receive("/selectedTrackName", trkName)
 			receive("/selectedTrackKeyRanges", trkRang)
@@ -225,7 +229,7 @@ module.exports = {
 			}
 
 			for (let i = 0; i < 8; i++) {
-				var fadIndx = trkNumb * 8 + i
+				const fadIndx = trkNumb * 8 + i
 				let nameOsc = fadName__osc[i]
 				let addrOsc = fadAddr__osc[i]
 				let codeOsc = fadCode__osc[i]
@@ -249,7 +253,7 @@ module.exports = {
 				}
 			}
 			for (let i = 0; i < 18; i++) {
-				var artIndx = trkNumb * 18 + i
+				const artIndx = trkNumb * 18 + i
 				let nameOsc = artName__osc[i]
 				let typeOsc = artType__osc[i]
 				let codeOsc = artCode__osc[i]
