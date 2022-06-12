@@ -9,17 +9,14 @@ Open Stage Control, Vienna Ensemble Pro, Cubase
 
 - GR1-OSC1-CH2.xml, etc. are "Generic Remotes" that are used in Cubase. They correlate with certain buttons and widgets in Open Stage Control and among other things, essentially allow for key commands to be accessed with MIDI commands.
 
-# Open Stage Control
-
-the OSC launcher
+# the OSC launcher
 ![the OSC launcher](./Images/osc-launcher.png)
 
-the OSC client with my work file loaded
+# the OSC client with my work file loaded
 ![the OSC client with my work file loaded](./Images/template.png)
 
-# Cubase
-Generic Remote loaded into Cubase
+# Generic Remote loaded into Cubase
 ![Generic Remote loaded into Cubase](./Images/GR1-OSC1-CH2.png)
 
-Custom Module in action
+# Custom Module in action
 ![Custom Module in action](./Images/custom-module-in-action.mov)
