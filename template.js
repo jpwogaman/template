@@ -43,6 +43,9 @@ for (i in allTrack_jsn) {
 			if (prop.includes("fadName__")) {
 				fadName__jsn.push(obj[prop])
 			}
+			if (prop.includes("fadType__")) {
+				fadType__jsn.push(obj[prop])
+			}
 			if (prop.includes("fadCode__")) {
 				fadCode__jsn.push(obj[prop])
 			}
@@ -103,23 +106,89 @@ for (let i = -2; i < 9; i++) {
 	let bn = String('B' + i)
 	allNotes_loc.push(cn, cs, dn, ds, en, fn, fs, gn, gs, an, as, bn)
 }
+//update current MIDI track
+function trkUpdate() {
+	send("midi", "OSC4", "/control", 1, 127, 127)
+}
+//send default articulation parameters to Cubase
+function prmUpdate(x, typeJsn, codeJsn, deftJsn) {
+	if (x === 3) {
+		send("midi", "OSC3", typeJsn, 1, codeJsn, deftJsn)
+	}
+	if (x === 4) {
+		send("midi", "OSC4", typeJsn, 1, codeJsn, deftJsn)
+	}
+}
 //toggle counters
 let togUpdat_loc = false
 let togCodes_loc = true
-let osc1 = false
-let osc2 = false
-let osc3 = false
-let osc4 = false
-let ctrl = false
-let note = false
-let ptch = false
-let keyP = false
-const myPorts__vrt = ["OSC1", "OSC2", "OSC3", "OSC4"]
-const myAddrs__vrt = ['/control', '/note', '/pitch', '/key_pressure']
-const myPorts__loc = [osc1, osc2, osc3, osc4]
-const myAddrs__loc = [ctrl, note, ptch, keyP]
-// const [osc1, osc2, osc3, osc4] = myPorts__loc;
+let togClkTr_loc = false
+let myPorts__loc = {
+	osc1: { bool: false, name: 'OSC1' },
+	osc2: { bool: false, name: 'OSC2' },
+	osc3: { bool: false, name: 'OSC3' },
+	osc4: { bool: false, name: 'OSC4' }
+}
+let myAddrs__loc = {
+	note: { bool: false, name: '/note' },
+	ntof: { bool: false, name: '/note_off' },
+	ctrl: { bool: false, name: '/control' },
+	pgrm: { bool: false, name: '/program' },
+	ptch: { bool: false, name: '/pitch' },
+	sysx: { bool: false, name: '/sysex' },
+	mtcT: { bool: false, name: '/mtc' },
+	chnP: { bool: false, name: '/channel_pressure' },
+	keyP: { bool: false, name: '/key_pressure' }
+}
 
+function portAddr(address, port) {
+	for (const myPort in myPorts__loc) {
+		if (port === `${myPorts__loc[myPort].name}`) {
+			myPorts__loc[myPort].bool = true
+		} else {
+			myPorts__loc[myPort].bool = false
+		}
+	}
+	for (const myAddrs in myAddrs__loc) {
+		if (address === `${myAddrs__loc[myAddrs].name}`) {
+			myAddrs__loc[myAddrs].bool = true
+		} else {
+			myAddrs__loc[myAddrs].bool = false
+		}
+	}
+}
+
+function toggles(arg1, arg2) {
+	if (arg1 === 127 && arg2 === 1) {
+		togUpdat_loc = true
+	}
+	if (arg1 === 127 && arg2 === 0) {
+		togUpdat_loc = false
+	}
+	if (arg1 === 119 && arg2 === 1) {
+		trkUpdate()
+		togCodes_loc = true
+	}
+	if (arg1 === 119 && arg2 === 0) {
+		trkUpdate()
+		togCodes_loc = false
+	}
+}
+
+function clickTrk(arg1, arg2) {
+	if (arg1 === 126 && arg2 === 1) {
+		togClkTr_loc = true
+	}
+	if (arg1 === 126 && arg2 === 0) {
+		togClkTr_loc = false
+	}
+}
+//
+function keyRanges(x) {
+	receive('/keyRangeVar1', x)
+	receive('/keyRangeScript', 1)
+}
+// the formal "custom module" for Open Stage Control
 module.exports = {
 
 	init: function() {
@@ -134,83 +203,39 @@ module.exports = {
 	oscInFilter: function(data) {
 
 		var { address, args, host, port } = data
+
+		portAddr(address, port)
+
 		const arg1 = args[1].value
 		const arg2 = args[2].value
+		const osc1 = myPorts__loc.osc1.bool
+		const osc2 = myPorts__loc.osc2.bool
+		const osc3 = myPorts__loc.osc3.bool
+		const osc4 = myPorts__loc.osc4.bool
+		const note = myAddrs__loc.note.bool
+		const ntof = myAddrs__loc.ntof.bool
+		const ctrl = myAddrs__loc.ctrl.bool
+		const pgrm = myAddrs__loc.pgrm.bool
+		const ptch = myAddrs__loc.ptch.bool
+		const sysx = myAddrs__loc.sysx.bool
+		const mtcT = myAddrs__loc.mtcT.bool
+		const chnP = myAddrs__loc.chnP.bool
+		const keyP = myAddrs__loc.keyP.bool
 
-		for (let i = 0; i < myPorts__loc.length; i++) {
-			if (port === myPorts__vrt[i]) {
-				myPorts__loc[i] = true
-			} else {
-				myPorts__loc[i] = false
-			}
+		if (ctrl && osc2) {
+			toggles(arg1, arg2)
 		}
-
-		// for (i in arr) props of object
-		// for (i of arr) value of index
-
-		for (let i = 0; i < myAddrs__loc.length; i++) {
-			if (address === myAddrs__vrt[i]) {
-				myAddrs__loc[i] = true
-			} else {
-				myAddrs__loc[i] = false
-			}
+		if (ctrl && osc3) {
+			clickTrk(arg1, arg2)
 		}
-		///////////////////////////////////
-		// var osc1 = false
-		// var osc2 = false
-		// var osc3 = false
-		// var osc4 = false
-		// var ctrl = false
-		// var note = false
-		// var ptch = false
-		// var keyP = false
-		// if (port === 'OSC1') {
-		// 	osc1 = true
-		// }
-		// if (port === 'OSC2') {
-		// 	osc2 = true
-		// }
-		// if (port === 'OSC3') {
-		// 	osc3 = true
-		// }
-		// if (port === 'OSC4') {
-		// 	osc4 = true
-		// }
-		// if (address === '/control') {
-		// 	ctrl = true
-		// }
-		// if (address === '/note') {
-		// 	note = true
-		// }
-		// if (address === '/key_pressure') {
-		// 	keyP = true
-		// }
-		///////////////////////////////////
-		if (ctrl && osc2 && arg1 === 127) {
-			if (arg2 === 1) {
-				togUpdat_loc = true
-			} else {
-				togUpdat_loc = false
-			}
-		}
-
-		if (ctrl && osc2 && arg1 === 119) {
-			send("midi", "OSC4", "/control", 1, 127, 127)
-			if (arg2 === 1) {
-				togCodes_loc = true
-			} else {
-				togCodes_loc = false
-			}
-		}
-
 		if (togUpdat_loc) {
 			receive('/trackNameColor', '#70b7ff')
 		} else {
 			receive('/trackNameColor', 'red')
 		}
-
-		if (togUpdat_loc && ctrl && arg1 === 126 && arg2 !== 0) {
-			send("midi", "OSC4", "/control", 1, 127, 127)
+		if (togUpdat_loc && togClkTr_loc) {
+			trkUpdate()
+			togClkTr_loc = false // need this to avoid infinite loop
 		}
 
 		if (keyP) {
@@ -224,26 +249,26 @@ module.exports = {
 			receive("/selectedTrackKeyRanges", trkRang)
 
 			if (artRng3 === "") {
-				receive('/keyRangeVar1', trkRang)
-				receive('/keyRangeScript', 1)
+				keyRanges(trkRang)
 			}
 
 			for (let i = 0; i < 8; i++) {
 				const fadIndx = trkNumb * 8 + i
-				let nameOsc = fadName__osc[i]
-				let addrOsc = fadAddr__osc[i]
-				let codeOsc = fadCode__osc[i]
-				let nameJsn = fadName__jsn[fadIndx]
-				let codeJsn = parseInt(fadCode__jsn[fadIndx])
-				let deftJsn = parseInt(fadDeflt_jsn[fadIndx])
-				let fadPage = fadCode__jsn[4]
+				const nameOsc = fadName__osc[i]
+				const addrOsc = fadAddr__osc[i]
+				const codeOsc = fadCode__osc[i]
+				const nameJsn = fadName__jsn[fadIndx]
+				const typeJsn = '/control' // will be fadType__jsn[fadIndx] in future
+				const codeJsn = parseInt(fadCode__jsn[fadIndx])
+				const deftJsn = parseInt(fadDeflt_jsn[fadIndx])
+				const fadPage = fadCode__jsn[4]
 
 				receive(nameOsc, nameJsn)
 				receive(addrOsc, deftJsn)
 				receive(codeOsc, codeJsn)
 
 				if (codeJsn !== null) {
-					send("midi", "OSC4", "/control", 1, codeJsn, deftJsn)
+					prmUpdate(4, typeJsn, codeJsn, deftJsn)
 				} else continue
 
 				if (fadPage !== null) {
@@ -254,24 +279,24 @@ module.exports = {
 			}
 			for (let i = 0; i < 18; i++) {
 				const artIndx = trkNumb * 18 + i
-				let nameOsc = artName__osc[i]
-				let typeOsc = artType__osc[i]
-				let codeOsc = artCode__osc[i]
-				let inptOsc = artInput_osc[i]
-				let deftOsc = artDeflt_osc[i]
-				let on__Osc = artOn____osc[i]
-				let off_Osc = artOff___osc[i]
-				let rangOsc = artRange_osc[i]
-				let colrOsc = artColor_osc[i]
-				let modAOsc = artModeA_osc[i]
-				let modBOsc = artModeB_osc[i]
-				let nameJsn = artName__jsn[artIndx]
-				let typeJsn = artType__jsn[artIndx]
-				let codeJsn = parseInt(artCode__jsn[artIndx])
-				let deftJsn = parseInt(artDeflt_jsn[artIndx])
-				let on__Jsn = parseInt(artOn____jsn[artIndx])
-				let off_Jsn = parseInt(artOff___jsn[artIndx])
-				let rangJsn = String(artRange_jsn[artIndx])
+				const nameOsc = artName__osc[i]
+				const typeOsc = artType__osc[i]
+				const codeOsc = artCode__osc[i]
+				const inptOsc = artInput_osc[i]
+				const deftOsc = artDeflt_osc[i]
+				const on__Osc = artOn____osc[i]
+				const off_Osc = artOff___osc[i]
+				const rangOsc = artRange_osc[i]
+				const colrOsc = artColor_osc[i]
+				const modAOsc = artModeA_osc[i]
+				const modBOsc = artModeB_osc[i]
+				const nameJsn = artName__jsn[artIndx]
+				const typeJsn = artType__jsn[artIndx]
+				const codeJsn = parseInt(artCode__jsn[artIndx])
+				const deftJsn = parseInt(artDeflt_jsn[artIndx])
+				const on__Jsn = parseInt(artOn____jsn[artIndx])
+				const off_Jsn = parseInt(artOff___jsn[artIndx])
+				const rangJsn = String(artRange_jsn[artIndx])
 				let codeDsp
 
 				if (typeJsn === "/control") {
@@ -310,15 +335,14 @@ module.exports = {
 					receive(inptOsc, "false")
 					if (i <= 1) {
 						receive(colrOsc, "#a86739")
-						send("midi", "OSC3", typeJsn, 1, codeJsn, deftJsn)
+						prmUpdate(3, typeJsn, codeJsn, deftJsn)
 					} else {
 						receive(colrOsc, "#6dfdbb")
 						receive(deftOsc, deftJsn)
 						if (deftJsn !== 0) {
 							receive(modAOsc, 0.75)
-							send("midi", "OSC4", typeJsn, 1, codeJsn, deftJsn)
-							receive('/keyRangeVar1', rangJsn)
-							receive('/keyRangeScript', 1)
+							prmUpdate(4, typeJsn, codeJsn, deftJsn)
+							keyRanges(rangJsn)
 						}
 					}
 				}
