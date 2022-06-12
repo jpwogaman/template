@@ -11,8 +11,7 @@
 
 - **template.js** is a "custom module" that can be loaded into Open Stage Control
 
-- **tracks.json** is a list of names, parameters, playable ranges, etc. for the orchestral instrument VSTs (hosted in VEP) that I use in Cubase. these parameters are viewed and adjusted in OSC via the custom module.
-    - Currently, I update my track parameters in an Excel document, then convert to JSON online ([link](https://www.convertcsv.com/csv-to-json.htm)), although I am designing a desktop program to streamline and enhance this process. ([view repo](https://github.com/jpwogaman/template-manager.git))
+- **tracks.json** is a list of names, parameters, playable ranges, etc. for the orchestral instrument VSTs (hosted in VEP) that I use in Cubase. these parameters are viewed and adjusted in OSC via the custom module. Currently, I update these parameters in an Excel document, then convert to JSON online, although I am designing a desktop program to streamline and enhance this process.
 
 - **GR1-OSC1-CH2.xml**, etc. are "Generic Remotes" that are used and configured in Cubase. They correlate with certain buttons and widgets in OSC and among other things, essentially allow for key commands to be activated with MIDI commands.
 
@@ -26,9 +25,11 @@
 ![Editing a Generic Remote in Cubase](./Images/GR1-OSC1-CH2.png)
 
 ## Custom Module in action
-Thanks to my custom module and Generic Remote 4, every time I click on a MIDI track, Cubase sends a unique signal to OSC(based on an Input Transformer on the track), which allows my touchscreen to display that specific track's available parameters in real time.
+Thanks to my custom module, every time I click on a MIDI track, Cubase sends a unique signal to OSC, which allows my touchscreen to display that specific track's available parameters in real time.
+
 ![Custom Module in action](./Images/custom-module-in-action.gif)
 
 ## Template Manager
 Work in progress! This is definitely ugly right now, but soon enough it will replace an EVEN UGLIER Excel document :)
+
 ![Template Manager](./Images/template-manager.png)
