@@ -7,4 +7,7 @@ Open Stage Control, Vienna Ensemble Pro, Cubase
 
 - tracks.json is a list of names, parameters, playable ranges, etc. for the orchestral instrument VSTs I use in Cubase. these is viewed in Open Stage Control with help from the custom module.
 
-- GR1-OSC1-CH2.xml, etc. are "Generic Remotes" that are used in Cubase. They correlate with certain buttons and widgets in Open Stage Control and essentially allow for key commands to be accessed with MIDI commands.
+- GR1-OSC1-CH2.xml, etc. are "Generic Remotes" that are used in Cubase. They correlate with certain buttons and widgets in Open Stage Control and among other things, essentially allow for key commands to be accessed with MIDI commands.
+
+
+![alt text](./Images/template.png)
