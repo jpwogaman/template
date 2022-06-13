@@ -188,7 +188,6 @@ function keyRanges(x) {
 	receive('/keyRangeVar1', x)
 	receive('/keyRangeScript', 1)
 }
-// the formal 'custom module' for Open Stage Control
 module.exports = {
 
 	init: function() {
